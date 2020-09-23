@@ -10,7 +10,7 @@
 !
 !==============================================================================
 
-#define ESMF_FILENAME "ESMF_InfoProfileUTest.F90"
+#define ESMF_FILENAME "ESMF_AttributeProfileUTest.F90"
 
 #include "ESMF_Macros.inc"
 #include "ESMF.h"
@@ -31,7 +31,6 @@ program ESMF_InfoProfileUTest
   ! !USES:
   use ESMF_TestMod     ! test methods
   use ESMF
-  use ESMF_InfoMod
 
   implicit none
 
@@ -54,6 +53,8 @@ program ESMF_InfoProfileUTest
   type(ESMF_Info) :: attrs, attrs2
   integer, parameter    :: nkeys = 1000
   integer, parameter    :: ntests = 100000
+  type(ESMF_Array)      :: array
+  type(ESMF_DistGrid)   :: distgrid
   logical :: is_present
 
   !----------------------------------------------------------------------------
@@ -66,10 +67,14 @@ program ESMF_InfoProfileUTest
   ! Test setting and getting a bunch of attributes.
 
   rc = ESMF_FAILURE
-  write(name, *) "ESMF_Info Profile Loop"
+  write(name, *) "ESMF_Attribute Profile Loop"
   write(failMsg, *) "Failure during profile loop test"
 
-  attrs = ESMF_InfoCreate(rc=rc)
+  distgrid = ESMF_DistGridCreate(minIndex=(/1,1/), maxIndex=(/5,5/), &
+    regDecomp=(/2,3/), rc=rc)
+  if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
+  array = ESMF_ArrayCreate(distgrid=distgrid, typekind=ESMF_TYPEKIND_I4, rc=rc)
   if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
   !----------------------------------------------------------------------------
@@ -79,13 +84,13 @@ program ESMF_InfoProfileUTest
 
     write(key, *) ii
 
-    call ESMF_TraceRegionEnter("JSON_Info::Set", rc=rc)
+    call ESMF_TraceRegionEnter("Attribute::Set", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
-    call ESMF_InfoSet(attrs, adjustl(trim(key)), ii, rc=rc)
+    call ESMF_AttributeSet(array, adjustl(trim(key)), ii, rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
-    call ESMF_TraceRegionExit("JSON_Info::Set", rc=rc)
+    call ESMF_TraceRegionExit("Attribute::Set", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
   end do
@@ -104,20 +109,18 @@ program ESMF_InfoProfileUTest
 
     write(key, *) idx
 
-    call ESMF_TraceRegionEnter("JSON_Info::Get", rc=rc)
+    call ESMF_TraceRegionEnter("Attribute::Get", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
-    call ESMF_InfoGet(attrs, adjustl(trim(key)), value, rc=rc)
+    call ESMF_AttributeGet(array, adjustl(trim(key)), value, rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
-    call ESMF_TraceRegionExit("JSON_Info::Get", rc=rc)
+    call ESMF_TraceRegionExit("Attribute::Get", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
   end do
 
   !----------------------------------------------------------------------------
-
-!  call ESMF_InfoPrint(attrs)
 
   deallocate(seed)
 
@@ -134,33 +137,35 @@ program ESMF_InfoProfileUTest
 
   do ii=1, ntests
 
-    call ESMF_TraceRegionEnter("JSON_Info::IsPresent False", rc=rc)
+    call ESMF_TraceRegionEnter("Attribute::IsPresent False", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
-    is_present = ESMF_InfoIsPresent(attrs, "this", rc=rc)
+    call ESMF_AttributeGet(array, "this", isPresent=is_present, rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
-    call ESMF_TraceRegionExit("JSON_Info::IsPresent False", rc=rc)
+    call ESMF_TraceRegionExit("Attribute::IsPresent False", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
   end do
 
   do ii=1, ntests
 
-    call ESMF_TraceRegionEnter("JSON_Info::IsPresent True", rc=rc)
+    call ESMF_TraceRegionEnter("Attribute::IsPresent True", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
-    is_present = ESMF_InfoIsPresent(attrs, "999", rc=rc)
+    call ESMF_AttributeGet(array, "999", isPresent=is_present, rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
-    call ESMF_TraceRegionExit("JSON_Info::IsPresent True", rc=rc)
+    call ESMF_TraceRegionExit("Attribute::IsPresent True", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
   end do
 
   call ESMF_Test((rc == ESMF_SUCCESS), name, failMsg, result, ESMF_SRCLINE)
 
-  call ESMF_InfoDestroy(attrs, rc=rc)
+  call ESMF_ArrayDestroy(array, rc=rc)
+  if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+  call ESMF_DistGridDestroy(distgrid, rc=rc)
   if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
   !----------------------------------------------------------------------------
