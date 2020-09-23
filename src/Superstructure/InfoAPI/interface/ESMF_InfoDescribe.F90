@@ -877,20 +877,20 @@ function getInfoArray(self, target, keywordEnforcer, rc) result(info)
 type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
   integer, intent(inout), optional :: rc
   type(ESMF_Info) :: info
-  type(ESMF_InfoDescribe) :: eidesc
   integer :: localrc
+  type(ESMF_Pointer) :: this
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
-  info%ptr = C_NULL_PTR
-  call eidesc%Initialize(createInfo=.false., rc=localrc)
+
+  !tdk:add init checks
+
+  call ESMF_ArrayGetThis(target, this, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Update(target, "", rc=localrc)
+
+  call ESMF_InfoGetFromPointer(this, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  info = eidesc%GetCurrentInfo(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Destroy(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
+
   if (present(rc)) rc = ESMF_SUCCESS
 end function getInfoArray
 
@@ -902,20 +902,18 @@ function getInfoArrayBundle(self, target, keywordEnforcer, rc) result(info)
 type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
   integer, intent(inout), optional :: rc
   type(ESMF_Info) :: info
-  type(ESMF_InfoDescribe) :: eidesc
+  type(ESMF_Pointer) :: this
   integer :: localrc
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
-  info%ptr = C_NULL_PTR
-  call eidesc%Initialize(createInfo=.false., rc=localrc)
+
+  call ESMF_ArrayBundleGetThis(target, this, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Update(target, "", rc=localrc)
+
+  call ESMF_InfoGetFromPointer(this, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  info = eidesc%GetCurrentInfo(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Destroy(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
+
   if (present(rc)) rc = ESMF_SUCCESS
 end function getInfoArrayBundle
 
@@ -927,20 +925,14 @@ function getInfoCplComp(self, target, keywordEnforcer, rc) result(info)
 type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
   integer, intent(inout), optional :: rc
   type(ESMF_Info) :: info
-  type(ESMF_InfoDescribe) :: eidesc
   integer :: localrc
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
-  info%ptr = C_NULL_PTR
-  call eidesc%Initialize(createInfo=.false., rc=localrc)
+
+  call ESMF_InfoGetFromBase(target%compp%base, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Update(target, "", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  info = eidesc%GetCurrentInfo(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Destroy(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
+
   if (present(rc)) rc = ESMF_SUCCESS
 end function getInfoCplComp
 
@@ -952,20 +944,14 @@ function getInfoGridComp(self, target, keywordEnforcer, rc) result(info)
 type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
   integer, intent(inout), optional :: rc
   type(ESMF_Info) :: info
-  type(ESMF_InfoDescribe) :: eidesc
   integer :: localrc
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
-  info%ptr = C_NULL_PTR
-  call eidesc%Initialize(createInfo=.false., rc=localrc)
+
+  call ESMF_InfoGetFromBase(target%compp%base, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Update(target, "", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  info = eidesc%GetCurrentInfo(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Destroy(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
+
   if (present(rc)) rc = ESMF_SUCCESS
 end function getInfoGridComp
 
@@ -977,20 +963,14 @@ function getInfoSciComp(self, target, keywordEnforcer, rc) result(info)
 type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
   integer, intent(inout), optional :: rc
   type(ESMF_Info) :: info
-  type(ESMF_InfoDescribe) :: eidesc
   integer :: localrc
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
-  info%ptr = C_NULL_PTR
-  call eidesc%Initialize(createInfo=.false., rc=localrc)
+
+  call ESMF_InfoGetFromBase(target%compp%base, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Update(target, "", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  info = eidesc%GetCurrentInfo(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Destroy(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
+
   if (present(rc)) rc = ESMF_SUCCESS
 end function getInfoSciComp
 
@@ -1002,20 +982,18 @@ function getInfoDistGrid(self, target, keywordEnforcer, rc) result(info)
 type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
   integer, intent(inout), optional :: rc
   type(ESMF_Info) :: info
-  type(ESMF_InfoDescribe) :: eidesc
+  type(ESMF_Pointer) :: this
   integer :: localrc
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
-  info%ptr = C_NULL_PTR
-  call eidesc%Initialize(createInfo=.false., rc=localrc)
+
+  call ESMF_DistGridGetThis(target, this, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Update(target, "", rc=localrc)
+
+  call ESMF_InfoGetFromPointer(this, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  info = eidesc%GetCurrentInfo(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Destroy(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
+
   if (present(rc)) rc = ESMF_SUCCESS
 end function getInfoDistGrid
 
@@ -1027,20 +1005,14 @@ function getInfoField(self, target, keywordEnforcer, rc) result(info)
 type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
   integer, intent(inout), optional :: rc
   type(ESMF_Info) :: info
-  type(ESMF_InfoDescribe) :: eidesc
   integer :: localrc
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
-  info%ptr = C_NULL_PTR
-  call eidesc%Initialize(createInfo=.false., rc=localrc)
+
+  call ESMF_InfoGetFromBase(target%ftypep%base, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Update(target, "", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  info = eidesc%GetCurrentInfo(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Destroy(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
+
   if (present(rc)) rc = ESMF_SUCCESS
 end function getInfoField
 
@@ -1052,20 +1024,14 @@ function getInfoFieldBundle(self, target, keywordEnforcer, rc) result(info)
 type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
   integer, intent(inout), optional :: rc
   type(ESMF_Info) :: info
-  type(ESMF_InfoDescribe) :: eidesc
   integer :: localrc
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
-  info%ptr = C_NULL_PTR
-  call eidesc%Initialize(createInfo=.false., rc=localrc)
+
+  call ESMF_InfoGetFromBase(target%this%base, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Update(target, "", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  info = eidesc%GetCurrentInfo(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Destroy(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
+
   if (present(rc)) rc = ESMF_SUCCESS
 end function getInfoFieldBundle
 
@@ -1077,20 +1043,14 @@ function getInfoGrid(self, target, keywordEnforcer, rc) result(info)
 type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
   integer, intent(inout), optional :: rc
   type(ESMF_Info) :: info
-  type(ESMF_InfoDescribe) :: eidesc
   integer :: localrc
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
-  info%ptr = C_NULL_PTR
-  call eidesc%Initialize(createInfo=.false., rc=localrc)
+
+  call ESMF_InfoGetFromPointer(target%this, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Update(target, "", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  info = eidesc%GetCurrentInfo(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Destroy(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
+
   if (present(rc)) rc = ESMF_SUCCESS
 end function getInfoGrid
 
@@ -1102,20 +1062,14 @@ function getInfoState(self, target, keywordEnforcer, rc) result(info)
 type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
   integer, intent(inout), optional :: rc
   type(ESMF_Info) :: info
-  type(ESMF_InfoDescribe) :: eidesc
   integer :: localrc
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
-  info%ptr = C_NULL_PTR
-  call eidesc%Initialize(createInfo=.false., rc=localrc)
+
+  call ESMF_InfoGetFromBase(target%statep%base, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Update(target, "", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  info = eidesc%GetCurrentInfo(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Destroy(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
+
   if (present(rc)) rc = ESMF_SUCCESS
 end function getInfoState
 
@@ -1127,20 +1081,14 @@ function getInfoLocStream(self, target, keywordEnforcer, rc) result(info)
 type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
   integer, intent(inout), optional :: rc
   type(ESMF_Info) :: info
-  type(ESMF_InfoDescribe) :: eidesc
   integer :: localrc
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
-  info%ptr = C_NULL_PTR
-  call eidesc%Initialize(createInfo=.false., rc=localrc)
+
+  call ESMF_InfoGetFromBase(target%lstypep%base, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Update(target, "", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  info = eidesc%GetCurrentInfo(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Destroy(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
+
   if (present(rc)) rc = ESMF_SUCCESS
 end function getInfoLocStream
 
@@ -1157,15 +1105,10 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
-  info%ptr = C_NULL_PTR
-  call eidesc%Initialize(createInfo=.false., rc=localrc)
+
+  call ESMF_InfoGetFromPointer(target%this, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Update(target, "", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  info = eidesc%GetCurrentInfo(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-  call eidesc%Destroy(rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
+
   if (present(rc)) rc = ESMF_SUCCESS
 end function getInfoMesh
 

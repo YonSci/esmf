@@ -4,6 +4,8 @@ ALL:  build_unit_tests
 run:  run_unit_tests
 run_uni:  run_unit_tests_uni
 
+#tdk: disable attributeprofileutest; enable other testing
+
 AUTOGEN = ESMF_AttPackABundleUTest.F90 \
           ESMF_AttPackArrayUTest.F90 \
           ESMF_AttPackCplCompUTest.F90 \

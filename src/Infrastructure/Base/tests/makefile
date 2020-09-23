@@ -6,6 +6,8 @@ run_uni:  run_unit_tests_uni
 
 LOCDIR	  = src/Infrastructure/Base/tests
 
+#tdk:disable profile u test
+
 #TESTS_BUILD = $(ESMF_TESTDIR)/ESMF_InfoArrayUTest
 .NOTPARALLEL:
 TESTS_BUILD   = $(ESMF_TESTDIR)/ESMF_BaseUTest \
