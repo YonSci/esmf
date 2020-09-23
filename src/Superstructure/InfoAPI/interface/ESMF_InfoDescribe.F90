@@ -883,7 +883,7 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
 
-  !tdk:add init checks
+  ESMF_INIT_CHECK_DEEP(ESMF_ArrayGetInit, target, rc)
 
   call ESMF_ArrayGetThis(target, this, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
@@ -907,6 +907,8 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
+  
+  ESMF_INIT_CHECK_DEEP(ESMF_ArrayBundleGetInit, target, rc)
 
   call ESMF_ArrayBundleGetThis(target, this, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
@@ -929,6 +931,8 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
+  
+  ESMF_INIT_CHECK_DEEP(ESMF_CplCompGetInit, target, rc)
 
   call ESMF_InfoGetFromBase(target%compp%base, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
@@ -949,6 +953,8 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
 
+  ESMF_INIT_CHECK_DEEP(ESMF_GridCompGetInit, target, rc)
+
   call ESMF_InfoGetFromBase(target%compp%base, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
@@ -967,6 +973,8 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
+  
+  ESMF_INIT_CHECK_DEEP(ESMF_SciCompGetInit, target, rc)
 
   call ESMF_InfoGetFromBase(target%compp%base, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
@@ -987,6 +995,8 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
+  
+  ESMF_INIT_CHECK_DEEP(ESMF_DistGridGetInit, target, rc)
 
   call ESMF_DistGridGetThis(target, this, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
@@ -1009,6 +1019,8 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
+  
+  ESMF_INIT_CHECK_DEEP(ESMF_FieldGetInit, target, rc)
 
   call ESMF_InfoGetFromBase(target%ftypep%base, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
@@ -1028,6 +1040,8 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
+  
+  ESMF_INIT_CHECK_DEEP(ESMF_FieldBundleGetInit, target, rc)
 
   call ESMF_InfoGetFromBase(target%this%base, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
@@ -1047,6 +1061,8 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
+  
+  ESMF_INIT_CHECK_DEEP(ESMF_GridGetInit, target, rc)
 
   call ESMF_InfoGetFromPointer(target%this, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
@@ -1066,6 +1082,8 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
+  
+  !ESMF_INIT_CHECK_DEEP(ESMF_StateGetInit, target, rc)
 
   call ESMF_InfoGetFromBase(target%statep%base, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
@@ -1085,6 +1103,8 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
+  
+  ESMF_INIT_CHECK_DEEP(ESMF_LocStreamGetInit, target, rc)
 
   call ESMF_InfoGetFromBase(target%lstypep%base, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
@@ -1105,6 +1125,8 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
 
   localrc = ESMF_FAILURE
   if (present(rc)) rc = ESMF_RC_NOT_IMPL
+  
+  ESMF_INIT_CHECK_DEEP(ESMF_MeshGetInit, target, rc)
 
   call ESMF_InfoGetFromPointer(target%this, info, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return

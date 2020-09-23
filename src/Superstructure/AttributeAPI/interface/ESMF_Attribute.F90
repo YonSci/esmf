@@ -19783,33 +19783,21 @@ subroutine ESMF_AttributeGetObjArrayR4(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -19820,15 +19808,11 @@ subroutine ESMF_AttributeGetObjArrayR4(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -19837,8 +19821,6 @@ subroutine ESMF_AttributeGetObjArrayR4(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -19850,8 +19832,6 @@ subroutine ESMF_AttributeGetObjArrayR4(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -19966,33 +19946,21 @@ subroutine ESMF_AttributeGetObjArrayR8(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -20003,15 +19971,11 @@ subroutine ESMF_AttributeGetObjArrayR8(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -20020,8 +19984,6 @@ subroutine ESMF_AttributeGetObjArrayR8(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -20033,8 +19995,6 @@ subroutine ESMF_AttributeGetObjArrayR8(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -20149,33 +20109,21 @@ subroutine ESMF_AttributeGetObjArrayI4(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -20186,15 +20134,11 @@ subroutine ESMF_AttributeGetObjArrayI4(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -20203,8 +20147,6 @@ subroutine ESMF_AttributeGetObjArrayI4(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -20216,8 +20158,6 @@ subroutine ESMF_AttributeGetObjArrayI4(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -20332,33 +20272,21 @@ subroutine ESMF_AttributeGetObjArrayI8(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -20369,15 +20297,11 @@ subroutine ESMF_AttributeGetObjArrayI8(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -20386,8 +20310,6 @@ subroutine ESMF_AttributeGetObjArrayI8(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -20399,8 +20321,6 @@ subroutine ESMF_AttributeGetObjArrayI8(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -20515,33 +20435,21 @@ subroutine ESMF_AttributeGetObjArrayCH(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -20552,15 +20460,11 @@ subroutine ESMF_AttributeGetObjArrayCH(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -20569,8 +20473,6 @@ subroutine ESMF_AttributeGetObjArrayCH(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -20582,8 +20484,6 @@ subroutine ESMF_AttributeGetObjArrayCH(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -20698,33 +20598,21 @@ subroutine ESMF_AttributeGetObjArrayLG(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -20735,15 +20623,11 @@ subroutine ESMF_AttributeGetObjArrayLG(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -20752,8 +20636,6 @@ subroutine ESMF_AttributeGetObjArrayLG(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -20765,8 +20647,6 @@ subroutine ESMF_AttributeGetObjArrayLG(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -20881,33 +20761,21 @@ subroutine ESMF_AttributeGetObjArrayBundleR4(target, name, value, defaultvalue, 
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -20918,15 +20786,11 @@ subroutine ESMF_AttributeGetObjArrayBundleR4(target, name, value, defaultvalue, 
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -20935,8 +20799,6 @@ subroutine ESMF_AttributeGetObjArrayBundleR4(target, name, value, defaultvalue, 
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -20948,8 +20810,6 @@ subroutine ESMF_AttributeGetObjArrayBundleR4(target, name, value, defaultvalue, 
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -21064,33 +20924,21 @@ subroutine ESMF_AttributeGetObjArrayBundleR8(target, name, value, defaultvalue, 
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -21101,15 +20949,11 @@ subroutine ESMF_AttributeGetObjArrayBundleR8(target, name, value, defaultvalue, 
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -21118,8 +20962,6 @@ subroutine ESMF_AttributeGetObjArrayBundleR8(target, name, value, defaultvalue, 
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -21131,8 +20973,6 @@ subroutine ESMF_AttributeGetObjArrayBundleR8(target, name, value, defaultvalue, 
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -21247,33 +21087,21 @@ subroutine ESMF_AttributeGetObjArrayBundleI4(target, name, value, defaultvalue, 
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -21284,15 +21112,11 @@ subroutine ESMF_AttributeGetObjArrayBundleI4(target, name, value, defaultvalue, 
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -21301,8 +21125,6 @@ subroutine ESMF_AttributeGetObjArrayBundleI4(target, name, value, defaultvalue, 
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -21314,8 +21136,6 @@ subroutine ESMF_AttributeGetObjArrayBundleI4(target, name, value, defaultvalue, 
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -21430,33 +21250,21 @@ subroutine ESMF_AttributeGetObjArrayBundleI8(target, name, value, defaultvalue, 
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -21467,15 +21275,11 @@ subroutine ESMF_AttributeGetObjArrayBundleI8(target, name, value, defaultvalue, 
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -21484,8 +21288,6 @@ subroutine ESMF_AttributeGetObjArrayBundleI8(target, name, value, defaultvalue, 
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -21497,8 +21299,6 @@ subroutine ESMF_AttributeGetObjArrayBundleI8(target, name, value, defaultvalue, 
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -21613,33 +21413,21 @@ subroutine ESMF_AttributeGetObjArrayBundleCH(target, name, value, defaultvalue, 
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -21650,15 +21438,11 @@ subroutine ESMF_AttributeGetObjArrayBundleCH(target, name, value, defaultvalue, 
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -21667,8 +21451,6 @@ subroutine ESMF_AttributeGetObjArrayBundleCH(target, name, value, defaultvalue, 
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -21680,8 +21462,6 @@ subroutine ESMF_AttributeGetObjArrayBundleCH(target, name, value, defaultvalue, 
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -21796,33 +21576,21 @@ subroutine ESMF_AttributeGetObjArrayBundleLG(target, name, value, defaultvalue, 
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -21833,15 +21601,11 @@ subroutine ESMF_AttributeGetObjArrayBundleLG(target, name, value, defaultvalue, 
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -21850,8 +21614,6 @@ subroutine ESMF_AttributeGetObjArrayBundleLG(target, name, value, defaultvalue, 
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -21863,8 +21625,6 @@ subroutine ESMF_AttributeGetObjArrayBundleLG(target, name, value, defaultvalue, 
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -21979,33 +21739,21 @@ subroutine ESMF_AttributeGetObjCplCompR4(target, name, value, defaultvalue, conv
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -22016,15 +21764,11 @@ subroutine ESMF_AttributeGetObjCplCompR4(target, name, value, defaultvalue, conv
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -22033,8 +21777,6 @@ subroutine ESMF_AttributeGetObjCplCompR4(target, name, value, defaultvalue, conv
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -22046,8 +21788,6 @@ subroutine ESMF_AttributeGetObjCplCompR4(target, name, value, defaultvalue, conv
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -22162,33 +21902,21 @@ subroutine ESMF_AttributeGetObjCplCompR8(target, name, value, defaultvalue, conv
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -22199,15 +21927,11 @@ subroutine ESMF_AttributeGetObjCplCompR8(target, name, value, defaultvalue, conv
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -22216,8 +21940,6 @@ subroutine ESMF_AttributeGetObjCplCompR8(target, name, value, defaultvalue, conv
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -22229,8 +21951,6 @@ subroutine ESMF_AttributeGetObjCplCompR8(target, name, value, defaultvalue, conv
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -22345,33 +22065,21 @@ subroutine ESMF_AttributeGetObjCplCompI4(target, name, value, defaultvalue, conv
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -22382,15 +22090,11 @@ subroutine ESMF_AttributeGetObjCplCompI4(target, name, value, defaultvalue, conv
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -22399,8 +22103,6 @@ subroutine ESMF_AttributeGetObjCplCompI4(target, name, value, defaultvalue, conv
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -22412,8 +22114,6 @@ subroutine ESMF_AttributeGetObjCplCompI4(target, name, value, defaultvalue, conv
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -22528,33 +22228,21 @@ subroutine ESMF_AttributeGetObjCplCompI8(target, name, value, defaultvalue, conv
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -22565,15 +22253,11 @@ subroutine ESMF_AttributeGetObjCplCompI8(target, name, value, defaultvalue, conv
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -22582,8 +22266,6 @@ subroutine ESMF_AttributeGetObjCplCompI8(target, name, value, defaultvalue, conv
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -22595,8 +22277,6 @@ subroutine ESMF_AttributeGetObjCplCompI8(target, name, value, defaultvalue, conv
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -22711,33 +22391,21 @@ subroutine ESMF_AttributeGetObjCplCompCH(target, name, value, defaultvalue, conv
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -22748,15 +22416,11 @@ subroutine ESMF_AttributeGetObjCplCompCH(target, name, value, defaultvalue, conv
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -22765,8 +22429,6 @@ subroutine ESMF_AttributeGetObjCplCompCH(target, name, value, defaultvalue, conv
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -22778,8 +22440,6 @@ subroutine ESMF_AttributeGetObjCplCompCH(target, name, value, defaultvalue, conv
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -22894,33 +22554,21 @@ subroutine ESMF_AttributeGetObjCplCompLG(target, name, value, defaultvalue, conv
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -22931,15 +22579,11 @@ subroutine ESMF_AttributeGetObjCplCompLG(target, name, value, defaultvalue, conv
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -22948,8 +22592,6 @@ subroutine ESMF_AttributeGetObjCplCompLG(target, name, value, defaultvalue, conv
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -22961,8 +22603,6 @@ subroutine ESMF_AttributeGetObjCplCompLG(target, name, value, defaultvalue, conv
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -23077,33 +22717,21 @@ subroutine ESMF_AttributeGetObjGridCompR4(target, name, value, defaultvalue, con
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -23114,15 +22742,11 @@ subroutine ESMF_AttributeGetObjGridCompR4(target, name, value, defaultvalue, con
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -23131,8 +22755,6 @@ subroutine ESMF_AttributeGetObjGridCompR4(target, name, value, defaultvalue, con
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -23144,8 +22766,6 @@ subroutine ESMF_AttributeGetObjGridCompR4(target, name, value, defaultvalue, con
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -23260,33 +22880,21 @@ subroutine ESMF_AttributeGetObjGridCompR8(target, name, value, defaultvalue, con
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -23297,15 +22905,11 @@ subroutine ESMF_AttributeGetObjGridCompR8(target, name, value, defaultvalue, con
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -23314,8 +22918,6 @@ subroutine ESMF_AttributeGetObjGridCompR8(target, name, value, defaultvalue, con
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -23327,8 +22929,6 @@ subroutine ESMF_AttributeGetObjGridCompR8(target, name, value, defaultvalue, con
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -23443,33 +23043,21 @@ subroutine ESMF_AttributeGetObjGridCompI4(target, name, value, defaultvalue, con
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -23480,15 +23068,11 @@ subroutine ESMF_AttributeGetObjGridCompI4(target, name, value, defaultvalue, con
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -23497,8 +23081,6 @@ subroutine ESMF_AttributeGetObjGridCompI4(target, name, value, defaultvalue, con
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -23510,8 +23092,6 @@ subroutine ESMF_AttributeGetObjGridCompI4(target, name, value, defaultvalue, con
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -23626,33 +23206,21 @@ subroutine ESMF_AttributeGetObjGridCompI8(target, name, value, defaultvalue, con
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -23663,15 +23231,11 @@ subroutine ESMF_AttributeGetObjGridCompI8(target, name, value, defaultvalue, con
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -23680,8 +23244,6 @@ subroutine ESMF_AttributeGetObjGridCompI8(target, name, value, defaultvalue, con
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -23693,8 +23255,6 @@ subroutine ESMF_AttributeGetObjGridCompI8(target, name, value, defaultvalue, con
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -23809,33 +23369,21 @@ subroutine ESMF_AttributeGetObjGridCompCH(target, name, value, defaultvalue, con
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -23846,15 +23394,11 @@ subroutine ESMF_AttributeGetObjGridCompCH(target, name, value, defaultvalue, con
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -23863,8 +23407,6 @@ subroutine ESMF_AttributeGetObjGridCompCH(target, name, value, defaultvalue, con
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -23876,8 +23418,6 @@ subroutine ESMF_AttributeGetObjGridCompCH(target, name, value, defaultvalue, con
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -23992,33 +23532,21 @@ subroutine ESMF_AttributeGetObjGridCompLG(target, name, value, defaultvalue, con
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -24029,15 +23557,11 @@ subroutine ESMF_AttributeGetObjGridCompLG(target, name, value, defaultvalue, con
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -24046,8 +23570,6 @@ subroutine ESMF_AttributeGetObjGridCompLG(target, name, value, defaultvalue, con
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -24059,8 +23581,6 @@ subroutine ESMF_AttributeGetObjGridCompLG(target, name, value, defaultvalue, con
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -24175,33 +23695,21 @@ subroutine ESMF_AttributeGetObjSciCompR4(target, name, value, defaultvalue, conv
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -24212,15 +23720,11 @@ subroutine ESMF_AttributeGetObjSciCompR4(target, name, value, defaultvalue, conv
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -24229,8 +23733,6 @@ subroutine ESMF_AttributeGetObjSciCompR4(target, name, value, defaultvalue, conv
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -24242,8 +23744,6 @@ subroutine ESMF_AttributeGetObjSciCompR4(target, name, value, defaultvalue, conv
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -24358,33 +23858,21 @@ subroutine ESMF_AttributeGetObjSciCompR8(target, name, value, defaultvalue, conv
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -24395,15 +23883,11 @@ subroutine ESMF_AttributeGetObjSciCompR8(target, name, value, defaultvalue, conv
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -24412,8 +23896,6 @@ subroutine ESMF_AttributeGetObjSciCompR8(target, name, value, defaultvalue, conv
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -24425,8 +23907,6 @@ subroutine ESMF_AttributeGetObjSciCompR8(target, name, value, defaultvalue, conv
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -24541,33 +24021,21 @@ subroutine ESMF_AttributeGetObjSciCompI4(target, name, value, defaultvalue, conv
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -24578,15 +24046,11 @@ subroutine ESMF_AttributeGetObjSciCompI4(target, name, value, defaultvalue, conv
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -24595,8 +24059,6 @@ subroutine ESMF_AttributeGetObjSciCompI4(target, name, value, defaultvalue, conv
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -24608,8 +24070,6 @@ subroutine ESMF_AttributeGetObjSciCompI4(target, name, value, defaultvalue, conv
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -24724,33 +24184,21 @@ subroutine ESMF_AttributeGetObjSciCompI8(target, name, value, defaultvalue, conv
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -24761,15 +24209,11 @@ subroutine ESMF_AttributeGetObjSciCompI8(target, name, value, defaultvalue, conv
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -24778,8 +24222,6 @@ subroutine ESMF_AttributeGetObjSciCompI8(target, name, value, defaultvalue, conv
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -24791,8 +24233,6 @@ subroutine ESMF_AttributeGetObjSciCompI8(target, name, value, defaultvalue, conv
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -24907,33 +24347,21 @@ subroutine ESMF_AttributeGetObjSciCompCH(target, name, value, defaultvalue, conv
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -24944,15 +24372,11 @@ subroutine ESMF_AttributeGetObjSciCompCH(target, name, value, defaultvalue, conv
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -24961,8 +24385,6 @@ subroutine ESMF_AttributeGetObjSciCompCH(target, name, value, defaultvalue, conv
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -24974,8 +24396,6 @@ subroutine ESMF_AttributeGetObjSciCompCH(target, name, value, defaultvalue, conv
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -25090,33 +24510,21 @@ subroutine ESMF_AttributeGetObjSciCompLG(target, name, value, defaultvalue, conv
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -25127,15 +24535,11 @@ subroutine ESMF_AttributeGetObjSciCompLG(target, name, value, defaultvalue, conv
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -25144,8 +24548,6 @@ subroutine ESMF_AttributeGetObjSciCompLG(target, name, value, defaultvalue, conv
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -25157,8 +24559,6 @@ subroutine ESMF_AttributeGetObjSciCompLG(target, name, value, defaultvalue, conv
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -25273,33 +24673,21 @@ subroutine ESMF_AttributeGetObjDistGridR4(target, name, value, defaultvalue, con
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -25310,15 +24698,11 @@ subroutine ESMF_AttributeGetObjDistGridR4(target, name, value, defaultvalue, con
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -25327,8 +24711,6 @@ subroutine ESMF_AttributeGetObjDistGridR4(target, name, value, defaultvalue, con
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -25340,8 +24722,6 @@ subroutine ESMF_AttributeGetObjDistGridR4(target, name, value, defaultvalue, con
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -25456,33 +24836,21 @@ subroutine ESMF_AttributeGetObjDistGridR8(target, name, value, defaultvalue, con
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -25493,15 +24861,11 @@ subroutine ESMF_AttributeGetObjDistGridR8(target, name, value, defaultvalue, con
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -25510,8 +24874,6 @@ subroutine ESMF_AttributeGetObjDistGridR8(target, name, value, defaultvalue, con
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -25523,8 +24885,6 @@ subroutine ESMF_AttributeGetObjDistGridR8(target, name, value, defaultvalue, con
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -25639,33 +24999,21 @@ subroutine ESMF_AttributeGetObjDistGridI4(target, name, value, defaultvalue, con
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -25676,15 +25024,11 @@ subroutine ESMF_AttributeGetObjDistGridI4(target, name, value, defaultvalue, con
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -25693,8 +25037,6 @@ subroutine ESMF_AttributeGetObjDistGridI4(target, name, value, defaultvalue, con
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -25706,8 +25048,6 @@ subroutine ESMF_AttributeGetObjDistGridI4(target, name, value, defaultvalue, con
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -25822,33 +25162,21 @@ subroutine ESMF_AttributeGetObjDistGridI8(target, name, value, defaultvalue, con
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -25859,15 +25187,11 @@ subroutine ESMF_AttributeGetObjDistGridI8(target, name, value, defaultvalue, con
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -25876,8 +25200,6 @@ subroutine ESMF_AttributeGetObjDistGridI8(target, name, value, defaultvalue, con
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -25889,8 +25211,6 @@ subroutine ESMF_AttributeGetObjDistGridI8(target, name, value, defaultvalue, con
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -26005,33 +25325,21 @@ subroutine ESMF_AttributeGetObjDistGridCH(target, name, value, defaultvalue, con
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -26042,15 +25350,11 @@ subroutine ESMF_AttributeGetObjDistGridCH(target, name, value, defaultvalue, con
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -26059,8 +25363,6 @@ subroutine ESMF_AttributeGetObjDistGridCH(target, name, value, defaultvalue, con
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -26072,8 +25374,6 @@ subroutine ESMF_AttributeGetObjDistGridCH(target, name, value, defaultvalue, con
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -26188,33 +25488,21 @@ subroutine ESMF_AttributeGetObjDistGridLG(target, name, value, defaultvalue, con
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -26225,15 +25513,11 @@ subroutine ESMF_AttributeGetObjDistGridLG(target, name, value, defaultvalue, con
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -26242,8 +25526,6 @@ subroutine ESMF_AttributeGetObjDistGridLG(target, name, value, defaultvalue, con
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -26255,8 +25537,6 @@ subroutine ESMF_AttributeGetObjDistGridLG(target, name, value, defaultvalue, con
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -26371,33 +25651,21 @@ subroutine ESMF_AttributeGetObjFieldR4(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -26408,15 +25676,11 @@ subroutine ESMF_AttributeGetObjFieldR4(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -26425,8 +25689,6 @@ subroutine ESMF_AttributeGetObjFieldR4(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -26438,8 +25700,6 @@ subroutine ESMF_AttributeGetObjFieldR4(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -26554,33 +25814,21 @@ subroutine ESMF_AttributeGetObjFieldR8(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -26591,15 +25839,11 @@ subroutine ESMF_AttributeGetObjFieldR8(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -26608,8 +25852,6 @@ subroutine ESMF_AttributeGetObjFieldR8(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -26621,8 +25863,6 @@ subroutine ESMF_AttributeGetObjFieldR8(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -26737,33 +25977,21 @@ subroutine ESMF_AttributeGetObjFieldI4(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -26774,15 +26002,11 @@ subroutine ESMF_AttributeGetObjFieldI4(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -26791,8 +26015,6 @@ subroutine ESMF_AttributeGetObjFieldI4(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -26804,8 +26026,6 @@ subroutine ESMF_AttributeGetObjFieldI4(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -26920,33 +26140,21 @@ subroutine ESMF_AttributeGetObjFieldI8(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -26957,15 +26165,11 @@ subroutine ESMF_AttributeGetObjFieldI8(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -26974,8 +26178,6 @@ subroutine ESMF_AttributeGetObjFieldI8(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -26987,8 +26189,6 @@ subroutine ESMF_AttributeGetObjFieldI8(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -27103,33 +26303,21 @@ subroutine ESMF_AttributeGetObjFieldCH(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -27140,15 +26328,11 @@ subroutine ESMF_AttributeGetObjFieldCH(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -27157,8 +26341,6 @@ subroutine ESMF_AttributeGetObjFieldCH(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -27170,8 +26352,6 @@ subroutine ESMF_AttributeGetObjFieldCH(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -27286,33 +26466,21 @@ subroutine ESMF_AttributeGetObjFieldLG(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -27323,15 +26491,11 @@ subroutine ESMF_AttributeGetObjFieldLG(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -27340,8 +26504,6 @@ subroutine ESMF_AttributeGetObjFieldLG(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -27353,8 +26515,6 @@ subroutine ESMF_AttributeGetObjFieldLG(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -27469,33 +26629,21 @@ subroutine ESMF_AttributeGetObjFieldBundleR4(target, name, value, defaultvalue, 
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -27506,15 +26654,11 @@ subroutine ESMF_AttributeGetObjFieldBundleR4(target, name, value, defaultvalue, 
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -27523,8 +26667,6 @@ subroutine ESMF_AttributeGetObjFieldBundleR4(target, name, value, defaultvalue, 
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -27536,8 +26678,6 @@ subroutine ESMF_AttributeGetObjFieldBundleR4(target, name, value, defaultvalue, 
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -27652,33 +26792,21 @@ subroutine ESMF_AttributeGetObjFieldBundleR8(target, name, value, defaultvalue, 
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -27689,15 +26817,11 @@ subroutine ESMF_AttributeGetObjFieldBundleR8(target, name, value, defaultvalue, 
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -27706,8 +26830,6 @@ subroutine ESMF_AttributeGetObjFieldBundleR8(target, name, value, defaultvalue, 
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -27719,8 +26841,6 @@ subroutine ESMF_AttributeGetObjFieldBundleR8(target, name, value, defaultvalue, 
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -27835,33 +26955,21 @@ subroutine ESMF_AttributeGetObjFieldBundleI4(target, name, value, defaultvalue, 
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -27872,15 +26980,11 @@ subroutine ESMF_AttributeGetObjFieldBundleI4(target, name, value, defaultvalue, 
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -27889,8 +26993,6 @@ subroutine ESMF_AttributeGetObjFieldBundleI4(target, name, value, defaultvalue, 
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -27902,8 +27004,6 @@ subroutine ESMF_AttributeGetObjFieldBundleI4(target, name, value, defaultvalue, 
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -28018,33 +27118,21 @@ subroutine ESMF_AttributeGetObjFieldBundleI8(target, name, value, defaultvalue, 
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -28055,15 +27143,11 @@ subroutine ESMF_AttributeGetObjFieldBundleI8(target, name, value, defaultvalue, 
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -28072,8 +27156,6 @@ subroutine ESMF_AttributeGetObjFieldBundleI8(target, name, value, defaultvalue, 
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -28085,8 +27167,6 @@ subroutine ESMF_AttributeGetObjFieldBundleI8(target, name, value, defaultvalue, 
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -28201,33 +27281,21 @@ subroutine ESMF_AttributeGetObjFieldBundleCH(target, name, value, defaultvalue, 
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -28238,15 +27306,11 @@ subroutine ESMF_AttributeGetObjFieldBundleCH(target, name, value, defaultvalue, 
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -28255,8 +27319,6 @@ subroutine ESMF_AttributeGetObjFieldBundleCH(target, name, value, defaultvalue, 
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -28268,8 +27330,6 @@ subroutine ESMF_AttributeGetObjFieldBundleCH(target, name, value, defaultvalue, 
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -28384,33 +27444,21 @@ subroutine ESMF_AttributeGetObjFieldBundleLG(target, name, value, defaultvalue, 
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -28421,15 +27469,11 @@ subroutine ESMF_AttributeGetObjFieldBundleLG(target, name, value, defaultvalue, 
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -28438,8 +27482,6 @@ subroutine ESMF_AttributeGetObjFieldBundleLG(target, name, value, defaultvalue, 
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -28451,8 +27493,6 @@ subroutine ESMF_AttributeGetObjFieldBundleLG(target, name, value, defaultvalue, 
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -28567,33 +27607,21 @@ subroutine ESMF_AttributeGetObjGridR4(target, name, value, defaultvalue, convent
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -28604,15 +27632,11 @@ subroutine ESMF_AttributeGetObjGridR4(target, name, value, defaultvalue, convent
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -28621,8 +27645,6 @@ subroutine ESMF_AttributeGetObjGridR4(target, name, value, defaultvalue, convent
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -28634,8 +27656,6 @@ subroutine ESMF_AttributeGetObjGridR4(target, name, value, defaultvalue, convent
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -28750,33 +27770,21 @@ subroutine ESMF_AttributeGetObjGridR8(target, name, value, defaultvalue, convent
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -28787,15 +27795,11 @@ subroutine ESMF_AttributeGetObjGridR8(target, name, value, defaultvalue, convent
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -28804,8 +27808,6 @@ subroutine ESMF_AttributeGetObjGridR8(target, name, value, defaultvalue, convent
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -28817,8 +27819,6 @@ subroutine ESMF_AttributeGetObjGridR8(target, name, value, defaultvalue, convent
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -28933,33 +27933,21 @@ subroutine ESMF_AttributeGetObjGridI4(target, name, value, defaultvalue, convent
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -28970,15 +27958,11 @@ subroutine ESMF_AttributeGetObjGridI4(target, name, value, defaultvalue, convent
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -28987,8 +27971,6 @@ subroutine ESMF_AttributeGetObjGridI4(target, name, value, defaultvalue, convent
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -29000,8 +27982,6 @@ subroutine ESMF_AttributeGetObjGridI4(target, name, value, defaultvalue, convent
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -29116,33 +28096,21 @@ subroutine ESMF_AttributeGetObjGridI8(target, name, value, defaultvalue, convent
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -29153,15 +28121,11 @@ subroutine ESMF_AttributeGetObjGridI8(target, name, value, defaultvalue, convent
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -29170,8 +28134,6 @@ subroutine ESMF_AttributeGetObjGridI8(target, name, value, defaultvalue, convent
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -29183,8 +28145,6 @@ subroutine ESMF_AttributeGetObjGridI8(target, name, value, defaultvalue, convent
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -29299,33 +28259,21 @@ subroutine ESMF_AttributeGetObjGridCH(target, name, value, defaultvalue, convent
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -29336,15 +28284,11 @@ subroutine ESMF_AttributeGetObjGridCH(target, name, value, defaultvalue, convent
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -29353,8 +28297,6 @@ subroutine ESMF_AttributeGetObjGridCH(target, name, value, defaultvalue, convent
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -29366,8 +28308,6 @@ subroutine ESMF_AttributeGetObjGridCH(target, name, value, defaultvalue, convent
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -29482,33 +28422,21 @@ subroutine ESMF_AttributeGetObjGridLG(target, name, value, defaultvalue, convent
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -29519,15 +28447,11 @@ subroutine ESMF_AttributeGetObjGridLG(target, name, value, defaultvalue, convent
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -29536,8 +28460,6 @@ subroutine ESMF_AttributeGetObjGridLG(target, name, value, defaultvalue, convent
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -29549,8 +28471,6 @@ subroutine ESMF_AttributeGetObjGridLG(target, name, value, defaultvalue, convent
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -29665,33 +28585,21 @@ subroutine ESMF_AttributeGetObjStateR4(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -29702,15 +28610,11 @@ subroutine ESMF_AttributeGetObjStateR4(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -29719,8 +28623,6 @@ subroutine ESMF_AttributeGetObjStateR4(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -29732,8 +28634,6 @@ subroutine ESMF_AttributeGetObjStateR4(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -29848,33 +28748,21 @@ subroutine ESMF_AttributeGetObjStateR8(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -29885,15 +28773,11 @@ subroutine ESMF_AttributeGetObjStateR8(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -29902,8 +28786,6 @@ subroutine ESMF_AttributeGetObjStateR8(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -29915,8 +28797,6 @@ subroutine ESMF_AttributeGetObjStateR8(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -30031,33 +28911,21 @@ subroutine ESMF_AttributeGetObjStateI4(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -30068,15 +28936,11 @@ subroutine ESMF_AttributeGetObjStateI4(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -30085,8 +28949,6 @@ subroutine ESMF_AttributeGetObjStateI4(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -30098,8 +28960,6 @@ subroutine ESMF_AttributeGetObjStateI4(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -30214,33 +29074,21 @@ subroutine ESMF_AttributeGetObjStateI8(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -30251,15 +29099,11 @@ subroutine ESMF_AttributeGetObjStateI8(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -30268,8 +29112,6 @@ subroutine ESMF_AttributeGetObjStateI8(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -30281,8 +29123,6 @@ subroutine ESMF_AttributeGetObjStateI8(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -30397,33 +29237,21 @@ subroutine ESMF_AttributeGetObjStateCH(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -30434,15 +29262,11 @@ subroutine ESMF_AttributeGetObjStateCH(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -30451,8 +29275,6 @@ subroutine ESMF_AttributeGetObjStateCH(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -30464,8 +29286,6 @@ subroutine ESMF_AttributeGetObjStateCH(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -30580,33 +29400,21 @@ subroutine ESMF_AttributeGetObjStateLG(target, name, value, defaultvalue, conven
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -30617,15 +29425,11 @@ subroutine ESMF_AttributeGetObjStateLG(target, name, value, defaultvalue, conven
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -30634,8 +29438,6 @@ subroutine ESMF_AttributeGetObjStateLG(target, name, value, defaultvalue, conven
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -30647,8 +29449,6 @@ subroutine ESMF_AttributeGetObjStateLG(target, name, value, defaultvalue, conven
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -30763,33 +29563,21 @@ subroutine ESMF_AttributeGetObjLocStreamR4(target, name, value, defaultvalue, co
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -30800,15 +29588,11 @@ subroutine ESMF_AttributeGetObjLocStreamR4(target, name, value, defaultvalue, co
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -30817,8 +29601,6 @@ subroutine ESMF_AttributeGetObjLocStreamR4(target, name, value, defaultvalue, co
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -30830,8 +29612,6 @@ subroutine ESMF_AttributeGetObjLocStreamR4(target, name, value, defaultvalue, co
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -30946,33 +29726,21 @@ subroutine ESMF_AttributeGetObjLocStreamR8(target, name, value, defaultvalue, co
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -30983,15 +29751,11 @@ subroutine ESMF_AttributeGetObjLocStreamR8(target, name, value, defaultvalue, co
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -31000,8 +29764,6 @@ subroutine ESMF_AttributeGetObjLocStreamR8(target, name, value, defaultvalue, co
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -31013,8 +29775,6 @@ subroutine ESMF_AttributeGetObjLocStreamR8(target, name, value, defaultvalue, co
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -31129,33 +29889,21 @@ subroutine ESMF_AttributeGetObjLocStreamI4(target, name, value, defaultvalue, co
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -31166,15 +29914,11 @@ subroutine ESMF_AttributeGetObjLocStreamI4(target, name, value, defaultvalue, co
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -31183,8 +29927,6 @@ subroutine ESMF_AttributeGetObjLocStreamI4(target, name, value, defaultvalue, co
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -31196,8 +29938,6 @@ subroutine ESMF_AttributeGetObjLocStreamI4(target, name, value, defaultvalue, co
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -31312,33 +30052,21 @@ subroutine ESMF_AttributeGetObjLocStreamI8(target, name, value, defaultvalue, co
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -31349,15 +30077,11 @@ subroutine ESMF_AttributeGetObjLocStreamI8(target, name, value, defaultvalue, co
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -31366,8 +30090,6 @@ subroutine ESMF_AttributeGetObjLocStreamI8(target, name, value, defaultvalue, co
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -31379,8 +30101,6 @@ subroutine ESMF_AttributeGetObjLocStreamI8(target, name, value, defaultvalue, co
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -31495,33 +30215,21 @@ subroutine ESMF_AttributeGetObjLocStreamCH(target, name, value, defaultvalue, co
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -31532,15 +30240,11 @@ subroutine ESMF_AttributeGetObjLocStreamCH(target, name, value, defaultvalue, co
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -31549,8 +30253,6 @@ subroutine ESMF_AttributeGetObjLocStreamCH(target, name, value, defaultvalue, co
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -31562,8 +30264,6 @@ subroutine ESMF_AttributeGetObjLocStreamCH(target, name, value, defaultvalue, co
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -31678,33 +30378,21 @@ subroutine ESMF_AttributeGetObjLocStreamLG(target, name, value, defaultvalue, co
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -31715,15 +30403,11 @@ subroutine ESMF_AttributeGetObjLocStreamLG(target, name, value, defaultvalue, co
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -31732,8 +30416,6 @@ subroutine ESMF_AttributeGetObjLocStreamLG(target, name, value, defaultvalue, co
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -31745,8 +30427,6 @@ subroutine ESMF_AttributeGetObjLocStreamLG(target, name, value, defaultvalue, co
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -31861,33 +30541,21 @@ subroutine ESMF_AttributeGetObjMeshR4(target, name, value, defaultvalue, convent
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -31898,15 +30566,11 @@ subroutine ESMF_AttributeGetObjMeshR4(target, name, value, defaultvalue, convent
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -31915,8 +30579,6 @@ subroutine ESMF_AttributeGetObjMeshR4(target, name, value, defaultvalue, convent
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -31928,8 +30590,6 @@ subroutine ESMF_AttributeGetObjMeshR4(target, name, value, defaultvalue, convent
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -32044,33 +30704,21 @@ subroutine ESMF_AttributeGetObjMeshR8(target, name, value, defaultvalue, convent
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -32081,15 +30729,11 @@ subroutine ESMF_AttributeGetObjMeshR8(target, name, value, defaultvalue, convent
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -32098,8 +30742,6 @@ subroutine ESMF_AttributeGetObjMeshR8(target, name, value, defaultvalue, convent
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -32111,8 +30753,6 @@ subroutine ESMF_AttributeGetObjMeshR8(target, name, value, defaultvalue, convent
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -32227,33 +30867,21 @@ subroutine ESMF_AttributeGetObjMeshI4(target, name, value, defaultvalue, convent
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -32264,15 +30892,11 @@ subroutine ESMF_AttributeGetObjMeshI4(target, name, value, defaultvalue, convent
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -32281,8 +30905,6 @@ subroutine ESMF_AttributeGetObjMeshI4(target, name, value, defaultvalue, convent
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -32294,8 +30916,6 @@ subroutine ESMF_AttributeGetObjMeshI4(target, name, value, defaultvalue, convent
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -32410,33 +31030,21 @@ subroutine ESMF_AttributeGetObjMeshI8(target, name, value, defaultvalue, convent
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -32447,15 +31055,11 @@ subroutine ESMF_AttributeGetObjMeshI8(target, name, value, defaultvalue, convent
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -32464,8 +31068,6 @@ subroutine ESMF_AttributeGetObjMeshI8(target, name, value, defaultvalue, convent
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -32477,8 +31079,6 @@ subroutine ESMF_AttributeGetObjMeshI8(target, name, value, defaultvalue, convent
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -32593,33 +31193,21 @@ subroutine ESMF_AttributeGetObjMeshCH(target, name, value, defaultvalue, convent
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -32630,15 +31218,11 @@ subroutine ESMF_AttributeGetObjMeshCH(target, name, value, defaultvalue, convent
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -32647,8 +31231,6 @@ subroutine ESMF_AttributeGetObjMeshCH(target, name, value, defaultvalue, convent
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -32660,8 +31242,6 @@ subroutine ESMF_AttributeGetObjMeshCH(target, name, value, defaultvalue, convent
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
@@ -32776,33 +31356,21 @@ subroutine ESMF_AttributeGetObjMeshLG(target, name, value, defaultvalue, convent
 
   !tdk:remove trace code
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -32813,15 +31381,11 @@ subroutine ESMF_AttributeGetObjMeshLG(target, name, value, defaultvalue, convent
   ! scalar.
   if (local_isPresent) then
 
-    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)
-    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   else
     ! Supply some default values for array and size checks to allow logical test
@@ -32830,8 +31394,6 @@ subroutine ESMF_AttributeGetObjMeshLG(target, name, value, defaultvalue, convent
     size = 0
   endif
 
-  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -32843,8 +31405,6 @@ subroutine ESMF_AttributeGetObjMeshLG(target, name, value, defaultvalue, convent
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
 
-  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)
-  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
   deallocate(key)
 
