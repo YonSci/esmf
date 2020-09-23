@@ -2323,6 +2323,13 @@ module NUOPC_ModelBase
 
     rc = ESMF_SUCCESS
 
+#if 1
+    call ESMF_TraceRegionEnter("AttributeOverhead:"//rName, rc=rc)
+    if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
+      return  ! bail out
+#endif
+
     ! query the component for info
     call NUOPC_CompGet(gcomp, name=name, verbosity=verbosity, &
       diagnostic=diagnostic, profiling=profiling, rc=rc)
@@ -2330,12 +2337,12 @@ module NUOPC_ModelBase
       line=__LINE__, file=trim(name)//":"//FILENAME)) return  ! bail out
     
     ! handle profiling
-    if (btest(profiling,3)) then
+!    if (btest(profiling,3)) then
       call ESMF_TraceRegionEnter(rName, rc=rc)
       if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
         return  ! bail out
-    endif
+!    endif
 
     ! intro
     call NUOPC_LogIntro(name, rName, verbosity, rc=rc)
@@ -2660,12 +2667,19 @@ module NUOPC_ModelBase
       line=__LINE__, file=trim(name)//":"//FILENAME)) return  ! bail out
 
     ! handle profiling
-    if (btest(profiling,3)) then
+!    if (btest(profiling,3)) then
       call ESMF_TraceRegionExit(rName, rc=rc)
       if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
         return  ! bail out
-    endif
+!    endif
+
+#if 1
+    call ESMF_TraceRegionExit("AttributeOverhead:"//rName, rc=rc)
+    if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
+      return  ! bail out
+#endif
 
   end subroutine
   
