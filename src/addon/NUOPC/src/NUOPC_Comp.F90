@@ -559,6 +559,9 @@ module NUOPC_Comp
     if (present(rc)) rc = ESMF_SUCCESS
     value="" ! initialize return value
 
+    call ESMF_TraceRegionEnter("NUOPC_CompAttributeGet::Inquire", rc=rc)
+    if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
     call NUOPC_CompAttributeGet(comp, name=name, isPresent=isPresent, &
       isSet=isSet, rc=localrc)
      if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
@@ -568,6 +571,9 @@ module NUOPC_Comp
     if (present(isSet)) then
       if (.not.isSet) return  ! early return
     endif
+
+    call ESMF_TraceRegionExit("NUOPC_CompAttributeGet::Inquire", rc=rc)
+    if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
     
     ! finally query the actual attribute value
 #if 0
@@ -575,6 +581,10 @@ module NUOPC_Comp
       convention="NUOPC", purpose="Instance", &
       attnestflag=ESMF_ATTNEST_ON, rc=localrc)
 #else
+
+    call ESMF_TraceRegionEnter("NUOPC_CompAttributeGet::InfoGet", rc=rc)
+    if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
     call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
@@ -583,6 +593,10 @@ module NUOPC_Comp
       return  ! bail out
     call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, value=value, &
       attnestflag=ESMF_ATTNEST_OFF, rc=localrc)
+
+    call ESMF_TraceRegionExit("NUOPC_CompAttributeGet::InfoGet", rc=rc)
+    if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
 #endif
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
@@ -823,6 +837,10 @@ module NUOPC_Comp
       convention="NUOPC", purpose="Instance", &
       attnestflag=ESMF_ATTNEST_ON, rc=localrc)
 #else
+
+    call ESMF_TraceRegionEnter("NUOPC_CompAttributeGet::InfoInquire", rc=rc)
+    if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
     call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
@@ -832,6 +850,10 @@ module NUOPC_Comp
     call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
       isPresent=isPresentOpt, typekind=tk, &
       attnestflag=ESMF_ATTNEST_OFF, rc=localrc)
+
+    call ESMF_TraceRegionExit("NUOPC_CompAttributeGet::InfoInquire", rc=rc)
+    if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
 #endif
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
@@ -2201,6 +2223,11 @@ module NUOPC_Comp
         low   =   9985  ! bits 0, 8, 9, 10, 13 
       endif
       ! query the component for Verbosity
+
+      !tdk:remove trace code
+      call ESMF_TraceRegionEnter("NUOPC_CompAttributeGet::Verbosity", rc=rc)
+      if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
       call NUOPC_CompAttributeGet(comp, name="Verbosity", value=valueString, &
         rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
@@ -2213,12 +2240,20 @@ module NUOPC_Comp
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(lName)//":"//FILENAME, rcToReturn=rc)) &
         return  ! bail out
+
+      call ESMF_TraceRegionExit("NUOPC_CompAttributeGet::Verbosity", rc=rc)
+      if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
     endif
     
     if (present(profiling)) then
       ! initialize the output value
       profiling = 0
       ! query the component for Profiling
+
+      call ESMF_TraceRegionEnter("NUOPC_CompAttributeGet::Profiling", rc=rc)
+      if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
       call NUOPC_CompAttributeGet(comp, name="Profiling", value=valueString, &
         rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
@@ -2231,12 +2266,20 @@ module NUOPC_Comp
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(lName)//":"//FILENAME, rcToReturn=rc)) &
         return  ! bail out
+
+      call ESMF_TraceRegionExit("NUOPC_CompAttributeGet::Profiling", rc=rc)
+      if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
     endif
     
     if (present(diagnostic)) then
       ! initialize the output value
       diagnostic = 0
       ! query the component for Diagnostic
+
+      call ESMF_TraceRegionEnter("NUOPC_CompAttributeGet::Diagnostic", rc=rc)
+      if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
       call NUOPC_CompAttributeGet(comp, name="Diagnostic", value=valueString, &
         rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
@@ -2249,6 +2292,10 @@ module NUOPC_Comp
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(lName)//":"//FILENAME, rcToReturn=rc)) &
         return  ! bail out
+
+      call ESMF_TraceRegionExit("NUOPC_CompAttributeGet::Diagnostic", rc=rc)
+      if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
     endif
     
     ! return successfully
