@@ -847,9 +847,16 @@ module NUOPC_Comp
       file=FILENAME, &
       rcToReturn=rc)) &
       return  ! bail out
-    call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
-      isPresent=isPresentOpt, typekind=tk, &
-      attnestflag=ESMF_ATTNEST_OFF, rc=localrc)
+
+    isPresentOpt = ESMF_InfoIsPresent(info, key="/NUOPC/Instance/"//name, &
+      rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+
+    tk = ESMF_InfoGetTK(info, key="/NUOPC/Instance/"//name, rc=localrc)
 
     call ESMF_TraceRegionExit("NUOPC_CompAttributeGet::InfoInquire", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)

@@ -196,6 +196,7 @@ public ESMF_InfoUpdate
 public ESMF_InfoReadJSON
 public ESMF_InfoWriteJSON
 public ESMF_InfoBroadcast
+public ESMF_InfoGetTK
 
 public c_info_base_sync
 public c_info_copyforattribute
@@ -2626,6 +2627,7 @@ end subroutine ESMF_InfoGetArrayLGAlloc
 
 !------------------------------------------------------------------------------
 
+!tdk:note how this can be slower?
 !BOP
 ! !IROUTINE: ESMF_InfoGet - Inquire an Info object for metadata
 !
@@ -3187,6 +3189,70 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
 
   if (present(rc)) rc = ESMF_SUCCESS
 end function ESMF_InfoIsPresent
+
+!------------------------------------------------------------------------------
+
+#undef  ESMF_METHOD
+#define ESMF_METHOD "ESMF_InfoGetTK()"
+!tdk:doc
+!BOP
+! !IROUTINE: ESMF_InfoGetTK - Check for key presence
+!
+! !INTERFACE:
+function ESMF_InfoGetTK(info, key, keywordEnforcer, attnestflag, rc) result(typekind)
+! !ARGUMENTS:
+  type(ESMF_Info), intent(in) :: info
+  character(len=*), intent(in) :: key
+type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
+  type(ESMF_AttNest_Flag), intent(in), optional :: attnestflag
+  integer, intent(out), optional :: rc
+! !RETURN VALUE:
+  type(ESMF_TypeKind_Flag) :: typekind
+!
+! !DESCRIPTION:
+!     Return true if \textit{key} exists in \texttt{ESMF\_Info}'s storage.
+!
+!     The arguments are:
+!     \begin{description}
+!     \item [info]
+!       Target \texttt{ESMF\_Info} object.
+!     \item [key]
+!       String key to access in \texttt{ESMF\_Info} storage. See section \ref{info_key_format}
+!       for an overview of the key format.
+!     \item [{[attnestflag]}]
+!       Setting to \texttt{ESMF\_ATTNEST\_ON} triggers a recursive search for
+!       \textit{keyParent}. The first instance of the key will be found in the
+!       hierarchy. Default is \texttt{ESMF\_ATTNEST\_OFF}.
+!     \item [{[isPointer]}]
+!       Default is true. If true, expect the \textit{key} is using JSON Pointer
+!       syntax (see section \ref{info_key_format}). Setting to false will trigger
+!       a slightly faster search.
+!     \item [{[rc]}]
+!       Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
+!     \end{description}
+!EOP
+
+  integer :: localrc
+  integer(C_INT) :: local_typekind
+  integer(C_INT) :: recursive
+
+  localrc = ESMF_FAILURE
+  if (present(rc)) rc = ESMF_FAILURE
+  recursive = 0 !false
+  local_typekind = 0
+
+  if (present(attnestflag)) then
+    if (attnestflag%value==ESMF_ATTNEST_ON%value) recursive = 1 !true
+  end if
+
+  call c_info_get_tk(info%ptr, trim(key)//C_NULL_CHAR, local_typekind, &
+    localrc, recursive)
+  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
+
+  typekind = ESMF_TypeKind_Flag(local_typekind)
+
+  if (present(rc)) rc = ESMF_SUCCESS
+end function ESMF_InfoGetTK
 
 !------------------------------------------------------------------------------
 
