@@ -55,6 +55,10 @@ program ESMF_InfoProfileUTest
   integer, parameter    :: nkeys = 1000
   integer, parameter    :: ntests = 100000
   logical :: is_present
+  type(ESMF_DistGrid) :: distgrid
+  type(ESMF_Array) :: array
+  character(len=7) :: set_value = "Maximum"
+  character(len=ESMF_MAXSTR) :: get_value
 
   !----------------------------------------------------------------------------
   call ESMF_TestStart(ESMF_SRCLINE, rc=rc)  ! calls ESMF_Initialize() internally
@@ -69,23 +73,30 @@ program ESMF_InfoProfileUTest
   write(name, *) "ESMF_Info Profile Loop"
   write(failMsg, *) "Failure during profile loop test"
 
-  attrs = ESMF_InfoCreate(rc=rc)
+  distgrid = ESMF_DistGridCreate(minIndex=(/1,1/), maxIndex=(/5,5/), &
+    regDecomp=(/2,3/), rc=rc)
+  if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
+  array = ESMF_ArrayCreate(distgrid=distgrid, typekind=ESMF_TYPEKIND_I4, rc=rc)
   if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
   !----------------------------------------------------------------------------
+
+  call ESMF_InfoGetFromHost(array, attrs, rc=rc)
+  if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
   ! Set nkeys count of attributes key/value pairs.
   do ii=1, nkeys
 
     write(key, *) ii
 
-    call ESMF_TraceRegionEnter("JSON_Info::Set", rc=rc)
+    call ESMF_TraceRegionEnter("Info::Set", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
-    call ESMF_InfoSet(attrs, adjustl(trim(key)), ii, rc=rc)
+    call ESMF_InfoSet(attrs, "/NUOPC/Instance/"//adjustl(trim(key)), set_value, rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
-    call ESMF_TraceRegionExit("JSON_Info::Set", rc=rc)
+    call ESMF_TraceRegionExit("Info::Set", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
   end do
@@ -104,13 +115,22 @@ program ESMF_InfoProfileUTest
 
     write(key, *) idx
 
-    call ESMF_TraceRegionEnter("JSON_Info::Get", rc=rc)
+    call ESMF_TraceRegionEnter("Info::Get", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
-    call ESMF_InfoGet(attrs, adjustl(trim(key)), value, rc=rc)
+    call ESMF_TraceRegionEnter("Info::Get::InfoGetFromHost", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
-    call ESMF_TraceRegionExit("JSON_Info::Get", rc=rc)
+    call ESMF_InfoGetFromHost(array, attrs, rc=rc)
+    if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
+    call ESMF_TraceRegionExit("Info::Get::InfoGetFromHost", rc=rc)
+    if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
+    call ESMF_InfoGet(attrs, "/NUOPC/Instance/"//adjustl(trim(key)), get_value, rc=rc)
+    if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
+    call ESMF_TraceRegionExit("Info::Get", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
   end do
@@ -134,33 +154,38 @@ program ESMF_InfoProfileUTest
 
   do ii=1, ntests
 
-    call ESMF_TraceRegionEnter("JSON_Info::IsPresent False", rc=rc)
+    call ESMF_TraceRegionEnter("Info::IsPresent False", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
     is_present = ESMF_InfoIsPresent(attrs, "this", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
-    call ESMF_TraceRegionExit("JSON_Info::IsPresent False", rc=rc)
+    call ESMF_TraceRegionExit("Info::IsPresent False", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
   end do
 
   do ii=1, ntests
 
-    call ESMF_TraceRegionEnter("JSON_Info::IsPresent True", rc=rc)
+    call ESMF_TraceRegionEnter("Info::IsPresent True", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
     is_present = ESMF_InfoIsPresent(attrs, "999", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
-    call ESMF_TraceRegionExit("JSON_Info::IsPresent True", rc=rc)
+    call ESMF_TraceRegionExit("Info::IsPresent True", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
   end do
 
   call ESMF_Test((rc == ESMF_SUCCESS), name, failMsg, result, ESMF_SRCLINE)
 
-  call ESMF_InfoDestroy(attrs, rc=rc)
+  !----------------------------------------------------------------------------
+
+  call ESMF_ArrayDestroy(array, rc=rc)
+  if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
+  call ESMF_DistGridDestroy(distgrid, rc=rc)
   if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
   !----------------------------------------------------------------------------
