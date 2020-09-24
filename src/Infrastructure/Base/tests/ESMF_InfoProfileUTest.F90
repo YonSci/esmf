@@ -59,6 +59,7 @@ program ESMF_InfoProfileUTest
   type(ESMF_Array) :: array
   character(len=7) :: set_value = "Maximum"
   character(len=ESMF_MAXSTR) :: get_value
+  type(ESMF_TypeKind_Flag) :: tk
 
   !----------------------------------------------------------------------------
   call ESMF_TestStart(ESMF_SRCLINE, rc=rc)  ! calls ESMF_Initialize() internally
@@ -139,7 +140,7 @@ program ESMF_InfoProfileUTest
 
 !  call ESMF_InfoPrint(attrs)
 
-  deallocate(seed)
+!  deallocate(seed)
 
   call ESMF_Test((rc == ESMF_SUCCESS), name, failMsg, result, ESMF_SRCLINE)
   !----------------------------------------------------------------------------
@@ -174,6 +175,33 @@ program ESMF_InfoProfileUTest
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
     call ESMF_TraceRegionExit("Info::IsPresent True", rc=rc)
+    if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
+  end do
+
+  call ESMF_Test((rc == ESMF_SUCCESS), name, failMsg, result, ESMF_SRCLINE)
+
+  !----------------------------------------------------------------------------
+  !EX_UTest
+
+  ! Profile checking Info inquire capabilities.
+
+  write(name, *) "ESMF_Info Inquire Profile Test"
+  write(failMsg, *) "Failure during inquire profile loop test"
+
+  do ii=1, ntests
+    call random_number(r)
+    idx = ceiling(r*nkeys)
+
+    write(key, *) idx
+
+    call ESMF_TraceRegionEnter("Info::Inquire", rc=rc)
+    if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
+    call ESMF_InfoGet(attrs, key="/NUOPC/Instance/"//adjustl(trim(key)), typekind=tk, rc=rc)
+    if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
+    call ESMF_TraceRegionExit("Info::Inquire", rc=rc)
     if (rc /= ESMF_SUCCESS) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
   end do
