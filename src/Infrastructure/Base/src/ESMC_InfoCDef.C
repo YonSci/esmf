@@ -313,6 +313,27 @@ void ESMC_InfoIsPresent(ESMCI::Info *info, char *key, int &fortran_bool_res,
 }
 
 #undef  ESMC_METHOD
+#define ESMC_METHOD "ESMC_InfoGetTK()"
+void ESMC_InfoGetTK(ESMCI::Info *info, char *key, int &typekind, int &esmc_rc,
+                    int &fortran_bool_recursive) {
+  ESMC_CHECK_INIT(info, esmc_rc)
+  bool recursive = (fortran_bool_recursive == 1) ? true:false;
+  try {
+    std::string local_key(key);
+    const json *sp = &(info->getStorageRef());
+    try {
+      json::json_pointer jp = info->formatKey(key);
+      ESMCI::update_json_pointer(info->getStorageRef(), &sp, jp, recursive);
+      bool is_32bit = ESMCI::retrieve_32bit_flag(info->getTypeStorage(), jp, recursive);
+      typekind = ESMCI::json_type_to_esmf_typekind(*sp, true, is_32bit);
+    }
+    ESMC_CATCH_ERRPASSTHRU
+    esmc_rc = ESMF_SUCCESS;
+  }
+  ESMC_CATCH_ISOC
+}
+
+#undef  ESMC_METHOD
 #define ESMC_METHOD "ESMC_InfoIsSet()"
 void ESMC_InfoIsSet(ESMCI::Info *info, char *key, int &isSet, int &esmc_rc) {
   ESMC_CHECK_INIT(info, esmc_rc)
