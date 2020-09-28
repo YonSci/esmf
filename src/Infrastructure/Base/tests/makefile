@@ -6,17 +6,14 @@ run_uni:  run_unit_tests_uni
 
 LOCDIR	  = src/Infrastructure/Base/tests
 
-#tdk:disable profile u test
-
-#TESTS_BUILD = $(ESMF_TESTDIR)/ESMF_InfoArrayUTest
 .NOTPARALLEL:
+#TESTS_BUILD = $(ESMF_TESTDIR)/ESMF_InfoArrayUTest
 TESTS_BUILD   = $(ESMF_TESTDIR)/ESMF_BaseUTest \
                 $(ESMF_TESTDIR)/ESMC_BaseUTest \
                 $(ESMF_TESTDIR)/ESMC_NlohmannJSONUTest \
                 $(ESMF_TESTDIR)/ESMC_InfoUTest \
                 $(ESMF_TESTDIR)/ESMF_InfoUTest \
-                $(ESMF_TESTDIR)/ESMF_InfoArrayUTest \
-                $(ESMF_TESTDIR)/ESMF_InfoProfileUTest
+                $(ESMF_TESTDIR)/ESMF_InfoArrayUTest
 
 TESTS_RUN     = RUN_ESMF_BaseUTest \
                 RUN_ESMC_BaseUTest \
@@ -31,8 +28,7 @@ TESTS_RUN_UNI = RUN_ESMF_BaseUTestUNI \
                 RUN_ESMC_NlohmannJSONUTestUNI \
                 RUN_ESMC_InfoUTestUNI \
                 RUN_ESMF_InfoUTestUNI \
-                RUN_ESMF_InfoArrayUTestUNI \
-                RUN_ESMF_InfoProfileUTestUNI
+                RUN_ESMF_InfoArrayUTestUNI
 
 include ${ESMF_DIR}/makefile
 

@@ -52,7 +52,7 @@ program ESMF_InfoProfileUTest
   integer(ESMF_KIND_I4) :: value
   type(ESMF_Info) :: attrs, attrs2
   integer, parameter    :: nkeys = 1000
-  integer, parameter    :: ntests = 100000
+  integer, parameter    :: ntests = 1000
   type(ESMF_Array)      :: array
   type(ESMF_DistGrid)   :: distgrid
   logical :: is_present
@@ -63,7 +63,7 @@ program ESMF_InfoProfileUTest
   !----------------------------------------------------------------------------
 
   !----------------------------------------------------------------------------
-  !EX_UTest
+  !EX_disabled_UTest
   ! Test setting and getting a bunch of attributes.
 
   rc = ESMF_FAILURE
@@ -128,7 +128,7 @@ program ESMF_InfoProfileUTest
   !----------------------------------------------------------------------------
 
   !----------------------------------------------------------------------------
-  !EX_UTest
+  !EX_disabled_UTest
 
   ! Profile checking for attribute presence.
 

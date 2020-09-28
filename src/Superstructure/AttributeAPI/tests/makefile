@@ -61,8 +61,7 @@ TESTS_BUILD = \
           $(ESMF_TESTDIR)/ESMF_AttributeUpdateMultiReconcileUTest \
           $(ESMF_TESTDIR)/ESMF_AttributeUpdateRemoveOnlyUTest \
           $(ESMF_TESTDIR)/ESMF_AttributeUpdateReconcileUTest \
-          $(ESMF_TESTDIR)/ESMF_AttributeUtilUTest \
-          $(ESMF_TESTDIR)/ESMF_AttributeProfileUTest
+          $(ESMF_TESTDIR)/ESMF_AttributeUtilUTest
 
 TESTS_RUN = \
           RUN_ESMF_AttPackABundleUTest \
@@ -93,8 +92,7 @@ TESTS_RUN = \
           RUN_ESMF_AttributeUpdateMultiReconcileUTest \
           RUN_ESMF_AttributeUpdateReconcileUTest \
           RUN_ESMF_AttributeUpdateRemoveOnlyUTest \
-          RUN_ESMF_AttributeUtilUTest \
-          RUN_ESMF_AttributeProfileUTest
+          RUN_ESMF_AttributeUtilUTest
 
 TESTS_RUN_UNI = \
           RUN_ESMF_AttPackArrayUTestUNI \
