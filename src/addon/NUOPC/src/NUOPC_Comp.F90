@@ -2411,11 +2411,6 @@ module NUOPC_Comp
     character(ESMF_MAXSTR)          :: lName, valueString
     integer                         :: max, high, low
     
-    call ESMF_TraceRegionEnter("NUOPC_GridCompGet", rc=rc)
-    if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
-      line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
-      return  ! bail out
-
     ! query the component for its name
     call ESMF_GridCompGet(comp, name=lName, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
@@ -2501,11 +2496,6 @@ module NUOPC_Comp
     ! return successfully
     if (present(rc)) rc = ESMF_SUCCESS
     
-    call ESMF_TraceRegionExit("NUOPC_GridCompGet", rc=rc)
-    if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
-      line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
-      return  ! bail out
-
   end subroutine
   !-----------------------------------------------------------------------------
 
