@@ -2627,7 +2627,6 @@ end subroutine ESMF_InfoGetArrayLGAlloc
 
 !------------------------------------------------------------------------------
 
-!tdk:note how this can be slower?
 !BOP
 ! !IROUTINE: ESMF_InfoGet - Inquire an Info object for metadata
 !
@@ -3194,9 +3193,8 @@ end function ESMF_InfoIsPresent
 
 #undef  ESMF_METHOD
 #define ESMF_METHOD "ESMF_InfoGetTK()"
-!tdk:doc
 !BOP
-! !IROUTINE: ESMF_InfoGetTK - Check for key presence
+! !IROUTINE: ESMF_InfoGetTK - Retrieve the ESMF TypeKind for a key
 !
 ! !INTERFACE:
 function ESMF_InfoGetTK(info, key, keywordEnforcer, attnestflag, rc) result(typekind)
@@ -3210,7 +3208,7 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
   type(ESMF_TypeKind_Flag) :: typekind
 !
 ! !DESCRIPTION:
-!     Return true if \textit{key} exists in \texttt{ESMF\_Info}'s storage.
+!     Return a value's ESMF TypeKind using a \textit{key}.
 !
 !     The arguments are:
 !     \begin{description}
@@ -3223,10 +3221,6 @@ type(ESMF_KeywordEnforcer), optional:: keywordEnforcer ! must use keywords below
 !       Setting to \texttt{ESMF\_ATTNEST\_ON} triggers a recursive search for
 !       \textit{keyParent}. The first instance of the key will be found in the
 !       hierarchy. Default is \texttt{ESMF\_ATTNEST\_OFF}.
-!     \item [{[isPointer]}]
-!       Default is true. If true, expect the \textit{key} is using JSON Pointer
-!       syntax (see section \ref{info_key_format}). Setting to false will trigger
-!       a slightly faster search.
 !     \item [{[rc]}]
 !       Return code; equals {\tt ESMF\_SUCCESS} if there are no errors.
 !     \end{description}

@@ -29,7 +29,6 @@ use ESMF_StateTypesMod
 {% for et in ets %}
 use ESMF_{{ et }}Mod
 {% endfor %}
-use ESMF_TraceMod
 
 implicit none
 
@@ -648,35 +647,15 @@ type(ESMF_KeywordEnforcer), optional :: keywordEnforcer ! must use keywords belo
 
 {% include "ESMF_Attribute-HandleAttNest.jinja2" %}{{ "" }}
 
-  !tdk:remove trace code
-
-{#  call ESMF_TraceRegionEnter("Attribute::Get::InfoFormatKey", rc=localrc)#}
-{#  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return#}
-
   call ESMF_InfoFormatKey(key, name, localrc, convention=convention, purpose=purpose)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-
-{#  call ESMF_TraceRegionExit("Attribute::Get::InfoFormatKey", rc=localrc)#}
-{#  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return#}
-
-{#  call ESMF_TraceRegionEnter("Attribute::Get::GetInfo", rc=localrc)#}
-{#  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return#}
 
   info = eidesc%GetInfo(target, rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
 
-{#  call ESMF_TraceRegionExit("Attribute::Get::GetInfo", rc=localrc)#}
-{#  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return#}
-
-{#  call ESMF_TraceRegionEnter("Attribute::Get::InfoIsPresent", rc=localrc)#}
-{#  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return#}
-
   local_isPresent = ESMF_InfoIsPresent(info, key, attnestflag=local_attnestflag, &
     isPointer=.true., rc=localrc)
   if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-
-{#  call ESMF_TraceRegionExit("Attribute::Get::InfoIsPresent", rc=localrc)#}
-{#  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return#}
 
   if (present(isPresent)) then
     isPresent = local_isPresent
@@ -686,26 +665,15 @@ type(ESMF_KeywordEnforcer), optional :: keywordEnforcer ! must use keywords belo
   ! Check if the target is an array with size 1. Operate on it as if it were a
   ! scalar.
   if (local_isPresent) then
-
-{#    call ESMF_TraceRegionEnter("Attribute::Get::InfoGetInquire", rc=localrc)#}
-{#    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return#}
-
     call ESMF_InfoGet(info, key=key, size=size, isArray=is_array, &
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
-
-{#    call ESMF_TraceRegionExit("Attribute::Get::InfoGetInquire", rc=localrc)#}
-{#    if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return#}
-
   else
     ! Supply some default values for array and size checks to allow logical test
     ! for scalar-array implicit conversion.
     is_array = .false.
     size = 0
   endif
-
-{#  call ESMF_TraceRegionEnter("Attribute::Get::InfoGet Actual", rc=localrc)#}
-{#  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return#}
 
   if (local_isPresent .and. is_array .and. size==1) then
     call ESMF_InfoGet(info, key, value, idx=1, default=defaultvalue, &
@@ -716,9 +684,6 @@ type(ESMF_KeywordEnforcer), optional :: keywordEnforcer ! must use keywords belo
       attnestflag=local_attnestflag, rc=localrc)
     if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return
   end if
-
-{#  call ESMF_TraceRegionExit("Attribute::Get::InfoGet Actual", rc=localrc)#}
-{#  if (ESMF_LogFoundError(localrc, ESMF_ERR_PASSTHRU, ESMF_CONTEXT, rcToReturn=rc)) return#}
 
   deallocate(key)
 
