@@ -73,6 +73,8 @@ module NUOPC_Comp
     module procedure NUOPC_CplCompAttributeGetI
     module procedure NUOPC_GridCompAttributeGetSL
     module procedure NUOPC_CplCompAttributeGetSL
+    module procedure NUOPC_GridCompAttributeGetIL
+    module procedure NUOPC_CplCompAttributeGetIL
   end interface
   !---------------------------------------------
   interface NUOPC_CompAttributeIngest
@@ -348,7 +350,7 @@ module NUOPC_Comp
     
     ! query attrCount
     call ESMF_AttributeGet(comp, convention="NUOPC", purpose="Instance", &
-      count=attrCount, attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+      count=attrCount, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
 
@@ -359,21 +361,20 @@ module NUOPC_Comp
     do i=1, attrCount
       ! pull out the name of the attribute
       call ESMF_AttributeGet(comp, convention="NUOPC", purpose="Instance", &
-        attributeIndex=i, name=stringList(i), attnestflag=ESMF_ATTNEST_ON, &
+        attributeIndex=i, name=stringList(i), &
         isPresent=isPresent, typekind=tk, rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
       if (.not.isPresent .or. (tk==ESMF_NOKIND)) cycle
       call ESMF_AttributeGet(comp, convention="NUOPC", purpose="Instance", &
-        attributeIndex=i, name=stringList(i), attnestflag=ESMF_ATTNEST_ON, &
+        attributeIndex=i, name=stringList(i), &
         typekind=tk, itemCount=itemCount, rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
       if (tk==ESMF_TYPEKIND_CHARACTER) then
         allocate(valueSL(itemCount))
-        call ESMF_AttributeGet(comp, convention="NUOPC", purpose="Instance", &
-          name=stringList(i), attnestflag=ESMF_ATTNEST_ON, valueList=valueSL, &
-          rc=localrc)
+        call NUOPC_CompAttributeGet(comp, name=stringList(i), &
+          valueList=valueSL, rc=localrc)
         if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
           line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
         tempString=stringList(i)
@@ -389,9 +390,8 @@ module NUOPC_Comp
         stringList(i)=trim(adjustl(tempString))
       elseif (tk==ESMF_TYPEKIND_I4) then
         allocate(valueIL(itemCount))
-        call ESMF_AttributeGet(comp, convention="NUOPC", purpose="Instance", &
-          name=stringList(i), attnestflag=ESMF_ATTNEST_ON, valueList=valueIL, &
-          rc=localrc)
+        call NUOPC_CompAttributeGet(comp, name=stringList(i), &
+          valueList=valueIL, rc=localrc)
         if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
           line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
         tempString=stringList(i)
@@ -457,7 +457,7 @@ module NUOPC_Comp
     
     ! query attrCount
     call ESMF_AttributeGet(comp, convention="NUOPC", purpose="Instance", &
-      count=attrCount, attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+      count=attrCount, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
 
@@ -468,21 +468,20 @@ module NUOPC_Comp
     do i=1, attrCount
       ! pull out the name of the attribute
       call ESMF_AttributeGet(comp, convention="NUOPC", purpose="Instance", &
-        attributeIndex=i, name=stringList(i), attnestflag=ESMF_ATTNEST_ON, &
+        attributeIndex=i, name=stringList(i), &
         isPresent=isPresent, typekind=tk, rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
       if (.not.isPresent .or. (tk==ESMF_NOKIND)) cycle
       call ESMF_AttributeGet(comp, convention="NUOPC", purpose="Instance", &
-        attributeIndex=i, name=stringList(i), attnestflag=ESMF_ATTNEST_ON, &
+        attributeIndex=i, name=stringList(i), &
         typekind=tk, itemCount=itemCount, rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
       if (tk==ESMF_TYPEKIND_CHARACTER) then
         allocate(valueSL(itemCount))
-        call ESMF_AttributeGet(comp, convention="NUOPC", purpose="Instance", &
-          name=stringList(i), attnestflag=ESMF_ATTNEST_ON, valueList=valueSL, &
-          rc=localrc)
+        call NUOPC_CompAttributeGet(comp, name=stringList(i), &
+          valueList=valueSL, rc=localrc)
         if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
           line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
         tempString=stringList(i)
@@ -498,9 +497,8 @@ module NUOPC_Comp
         stringList(i)=trim(adjustl(tempString))
       elseif (tk==ESMF_TYPEKIND_I4) then
         allocate(valueIL(itemCount))
-        call ESMF_AttributeGet(comp, convention="NUOPC", purpose="Instance", &
-          name=stringList(i), attnestflag=ESMF_ATTNEST_ON, valueList=valueIL, &
-          rc=localrc)
+        call NUOPC_CompAttributeGet(comp, name=stringList(i), &
+          valueList=valueIL, rc=localrc)
         if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
           line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
         tempString=stringList(i)
@@ -553,11 +551,13 @@ module NUOPC_Comp
 !EOP
   !-----------------------------------------------------------------------------
     ! local variables
-    integer :: localrc
-    
+    integer         :: localrc
+    type(ESMF_Info) :: info
+
     if (present(rc)) rc = ESMF_SUCCESS
     value="" ! initialize return value
 
+    ! deal with isPresent and isSet
     call NUOPC_CompAttributeGet(comp, name=name, isPresent=isPresent, &
       isSet=isSet, rc=localrc)
      if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
@@ -568,10 +568,15 @@ module NUOPC_Comp
       if (.not.isSet) return  ! early return
     endif
     
-    ! finally query the actual attribute value
-    call ESMF_AttributeGet(comp, name=name, value=value, &
-      convention="NUOPC", purpose="Instance", &
-      attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+    ! finally query the actual attribute
+    call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+    call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, value=value, &
+      rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
       file=FILENAME, &
@@ -605,11 +610,13 @@ module NUOPC_Comp
 !EOP
   !-----------------------------------------------------------------------------
     ! local variables
-    integer :: localrc
+    integer         :: localrc
+    type(ESMF_Info) :: info
     
     if (present(rc)) rc = ESMF_SUCCESS
     value="" ! initialize return value
 
+    ! deal with isPresent and isSet
     call NUOPC_CompAttributeGet(comp, name=name, isPresent=isPresent, &
       isSet=isSet, rc=localrc)
      if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
@@ -620,10 +627,15 @@ module NUOPC_Comp
       if (.not.isSet) return  ! early return
     endif
     
-    ! finally query the actual attribute value
-    call ESMF_AttributeGet(comp, name=name, value=value, &
-      convention="NUOPC", purpose="Instance", &
-      attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+    ! finally query the actual attribute
+    call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+    call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, value=value, &
+      rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
       file=FILENAME, &
@@ -657,10 +669,12 @@ module NUOPC_Comp
 !EOP
   !-----------------------------------------------------------------------------
     ! local variables
-    integer :: localrc
+    integer         :: localrc
+    type(ESMF_Info) :: info
     
     if (present(rc)) rc = ESMF_SUCCESS
 
+    ! deal with isPresent and isSet
     call NUOPC_CompAttributeGet(comp, name=name, isPresent=isPresent, &
       isSet=isSet, rc=localrc)
      if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
@@ -671,10 +685,15 @@ module NUOPC_Comp
       if (.not.isSet) return  ! early return
     endif
     
-    ! finally query the actual attribute value
-    call ESMF_AttributeGet(comp, name=name, value=value, &
-      convention="NUOPC", purpose="Instance", &
-      attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+    ! finally query the actual attribute
+    call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+    call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, value=value, &
+      rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
       file=FILENAME, &
@@ -708,10 +727,12 @@ module NUOPC_Comp
 !EOP
   !-----------------------------------------------------------------------------
     ! local variables
-    integer :: localrc
-    
+    integer         :: localrc
+    type(ESMF_Info) :: info
+
     if (present(rc)) rc = ESMF_SUCCESS
 
+    ! deal with isPresent and isSet
     call NUOPC_CompAttributeGet(comp, name=name, isPresent=isPresent, &
       isSet=isSet, rc=localrc)
      if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
@@ -722,10 +743,15 @@ module NUOPC_Comp
       if (.not.isSet) return  ! early return
     endif
     
-    ! finally query the actual attribute value
-    call ESMF_AttributeGet(comp, name=name, value=value, &
-      convention="NUOPC", purpose="Instance", &
-      attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+    ! finally query the actual attribute
+    call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+    call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, value=value, &
+      rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
       file=FILENAME, &
@@ -764,14 +790,25 @@ module NUOPC_Comp
     ! local variables
     integer                 :: localrc
     logical                 :: isPresentOpt
+    logical                 :: isArray
     type(ESMF_TYPEKIND_FLAG):: tk
-    
+    type(ESMF_Info)         :: info
+
     if (present(rc)) rc = ESMF_SUCCESS
 
-    call ESMF_AttributeGet(comp, name=name, &
-      isPresent=isPresentOpt, typekind=tk, &
-      convention="NUOPC", purpose="Instance", &
-      attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+    ! early successful return if nothing to be done here
+    if (.not.(present(valueList).or.present(isPresent).or.present(isSet).or. &
+      present(itemCount).or.present(typekind))) return
+
+    ! query the actual attribute
+    call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+    call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+      isPresent=isPresentOpt, typekind=tk, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
       file=FILENAME, &
@@ -784,6 +821,9 @@ module NUOPC_Comp
       isSet = .false.
       if (tk/=ESMF_NOKIND) isSet = .true.
     endif
+    ! early successful return if deeper query is not needed
+    if (.not.(present(valueList).or.present(itemCount))) return
+    ! only continue if valueList or itemCount must be determined
     if (.not.isPresentOpt) then
       ! must bail out
       if (present(isPresent).or.present(isSet) &
@@ -805,18 +845,34 @@ module NUOPC_Comp
     endif
 
     if (present(valueList)) then
-      call ESMF_AttributeGet(comp, name=name, valueList=valueList, &
-        itemCount=itemCount, convention="NUOPC", purpose="Instance", &
-        attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+      call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+        isArray=isArray, rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, &
         file=FILENAME, &
         rcToReturn=rc)) &
         return  ! bail out
-    elseif (present(itemCount)) then
-      call ESMF_AttributeGet(comp, name=name, &
-        itemCount=itemCount, convention="NUOPC", purpose="Instance", &
-        attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+      if (isArray) then
+        call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+          values=valueList, rc=localrc)
+        if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+          line=__LINE__, &
+          file=FILENAME, &
+          rcToReturn=rc)) &
+          return  ! bail out
+      else
+        call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+          value=valueList(1), rc=localrc)
+        if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+          line=__LINE__, &
+          file=FILENAME, &
+          rcToReturn=rc)) &
+          return  ! bail out
+      endif
+    endif
+    if (present(itemCount)) then
+      call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+        size=itemCount, rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, &
         file=FILENAME, &
@@ -856,14 +912,25 @@ module NUOPC_Comp
     ! local variables
     integer                 :: localrc
     logical                 :: isPresentOpt
+    logical                 :: isArray
     type(ESMF_TYPEKIND_FLAG):: tk
-    
+    type(ESMF_Info)         :: info
+
     if (present(rc)) rc = ESMF_SUCCESS
 
-    call ESMF_AttributeGet(comp, name=name, &
-      isPresent=isPresentOpt, typekind=tk, &
-      convention="NUOPC", purpose="Instance", &
-      attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+    ! early successful return if nothing to be done here
+    if (.not.(present(valueList).or.present(isPresent).or.present(isSet).or. &
+      present(itemCount).or.present(typekind))) return
+
+    ! query the actual attribute
+    call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+    call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+      isPresent=isPresentOpt, typekind=tk, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
       file=FILENAME, &
@@ -876,6 +943,9 @@ module NUOPC_Comp
       isSet = .false.
       if (tk/=ESMF_NOKIND) isSet = .true.
     endif
+    ! early successful return if deeper query is not needed
+    if (.not.(present(valueList).or.present(itemCount))) return
+    ! only continue if valueList or itemCount must be determined
     if (.not.isPresentOpt) then
       ! must bail out
       if (present(isPresent).or.present(isSet) &
@@ -897,18 +967,34 @@ module NUOPC_Comp
     endif
 
     if (present(valueList)) then
-      call ESMF_AttributeGet(comp, name=name, valueList=valueList, &
-        itemCount=itemCount, convention="NUOPC", purpose="Instance", &
-        attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+      call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+        isArray=isArray, rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, &
         file=FILENAME, &
         rcToReturn=rc)) &
         return  ! bail out
-    elseif (present(itemCount)) then
-      call ESMF_AttributeGet(comp, name=name, &
-        itemCount=itemCount, convention="NUOPC", purpose="Instance", &
-        attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+      if (isArray) then
+        call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+          values=valueList, rc=localrc)
+        if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+          line=__LINE__, &
+          file=FILENAME, &
+          rcToReturn=rc)) &
+          return  ! bail out
+      else
+        call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+          value=valueList(1), rc=localrc)
+        if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+          line=__LINE__, &
+          file=FILENAME, &
+          rcToReturn=rc)) &
+          return  ! bail out
+      endif
+    endif
+    if (present(itemCount)) then
+      call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+        size=itemCount, rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, &
         file=FILENAME, &
@@ -916,6 +1002,190 @@ module NUOPC_Comp
         return  ! bail out
     endif
     
+  end subroutine
+  !-----------------------------------------------------------------------------
+  
+  !-----------------------------------------------------------------------------
+!BOP
+! !IROUTINE: NUOPC_CompAttributeGet - Get a NUOPC GridComp Attribute
+! !INTERFACE:
+  ! Private name; call using NUOPC_CompAttributeGet() 
+  subroutine NUOPC_GridCompAttributeGetIL(comp, name, valueList, isPresent, &
+    isSet, itemCount, typekind, rc)
+! !ARGUMENTS:
+    type(ESMF_GridComp),       intent(in)            :: comp
+    character(*),              intent(in)            :: name
+    integer,                   intent(out)           :: valueList(:)
+    logical,                   intent(out), optional :: isPresent
+    logical,                   intent(out), optional :: isSet
+    integer,                   intent(out), optional :: itemCount
+    type(ESMF_TypeKind_Flag),  intent(out), optional :: typekind
+    integer,                   intent(out), optional :: rc
+! !DESCRIPTION:
+!   Access the Attribute {\tt name} inside of {\tt comp} using the highest level
+!   of the standard NUOPC AttPack hierarchy (convention="NUOPC", 
+!   purpose="Instance").
+!
+!   Unless {\tt isPresent} and/or {\tt isSet} are provided, return with error
+!   if the Attribute is not present or not set. {\tt isSet } will be 
+!   {\tt .false.} for not present Attributes and not set Attributes.
+!EOP
+  !-----------------------------------------------------------------------------
+    ! local variables
+    integer                 :: localrc
+    logical                 :: isPresentOpt
+    logical                 :: isArray
+    type(ESMF_TYPEKIND_FLAG):: tk
+    type(ESMF_Info)         :: info
+
+    if (present(rc)) rc = ESMF_SUCCESS
+
+    ! deal with isPresent and isSet
+    call NUOPC_CompAttributeGet(comp, name=name, isPresent=isPresent, &
+      isSet=isSet, rc=localrc)
+     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) return  ! bail out
+    if (present(isSet)) then
+      if (.not.isSet) return  ! early return
+    endif
+
+    ! query the actual attribute
+    call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+
+    call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+      isArray=isArray, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+
+    if (isArray) then
+      call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+        values=valueList, rc=localrc)
+      if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+        line=__LINE__, &
+        file=FILENAME, &
+        rcToReturn=rc)) &
+        return  ! bail out
+    else
+      call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+        value=valueList(1), rc=localrc)
+      if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+        line=__LINE__, &
+        file=FILENAME, &
+        rcToReturn=rc)) &
+        return  ! bail out
+    endif
+    if (present(itemCount)) then
+      call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+        size=itemCount, rc=localrc)
+      if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+        line=__LINE__, &
+        file=FILENAME, &
+        rcToReturn=rc)) &
+        return  ! bail out
+    endif
+
+  end subroutine
+  !-----------------------------------------------------------------------------
+  
+  !-----------------------------------------------------------------------------
+!BOP
+! !IROUTINE: NUOPC_CompAttributeGet - Get a NUOPC CplComp Attribute
+! !INTERFACE:
+  ! Private name; call using NUOPC_CompAttributeGet() 
+  subroutine NUOPC_CplCompAttributeGetIL(comp, name, valueList, isPresent, &
+    isSet, itemCount, typekind, rc)
+! !ARGUMENTS:
+    type(ESMF_CplComp),       intent(in)            :: comp
+    character(*),             intent(in)            :: name
+    integer,                  intent(out)           :: valueList(:)
+    logical,                  intent(out), optional :: isPresent
+    logical,                  intent(out), optional :: isSet
+    integer,                  intent(out), optional :: itemCount
+    type(ESMF_TypeKind_Flag), intent(out), optional :: typekind
+    integer,                  intent(out), optional :: rc
+! !DESCRIPTION:
+!   Access the Attribute {\tt name} inside of {\tt comp} using the highest level
+!   of the standard NUOPC AttPack hierarchy (convention="NUOPC", 
+!   purpose="Instance").
+!
+!   Unless {\tt isPresent} and/or {\tt isSet} are provided, return with error
+!   if the Attribute is not present or not set. {\tt isSet } will be 
+!   {\tt .false.} for not present Attributes and not set Attributes.
+!EOP
+  !-----------------------------------------------------------------------------
+    ! local variables
+    integer                 :: localrc
+    logical                 :: isPresentOpt
+    logical                 :: isArray
+    type(ESMF_TYPEKIND_FLAG):: tk
+    type(ESMF_Info)         :: info
+
+    if (present(rc)) rc = ESMF_SUCCESS
+
+    ! deal with isPresent and isSet
+    call NUOPC_CompAttributeGet(comp, name=name, isPresent=isPresent, &
+      isSet=isSet, rc=localrc)
+     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) return  ! bail out
+    if (present(isSet)) then
+      if (.not.isSet) return  ! early return
+    endif
+
+    ! query the actual attribute
+    call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+
+    call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+      isArray=isArray, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+
+    if (isArray) then
+      call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+        values=valueList, rc=localrc)
+      if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+        line=__LINE__, &
+        file=FILENAME, &
+        rcToReturn=rc)) &
+        return  ! bail out
+    else
+      call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+        value=valueList(1), rc=localrc)
+      if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+        line=__LINE__, &
+        file=FILENAME, &
+        rcToReturn=rc)) &
+        return  ! bail out
+    endif
+    if (present(itemCount)) then
+      call ESMF_InfoGet(info, key="/NUOPC/Instance/"//name, &
+        size=itemCount, rc=localrc)
+      if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+        line=__LINE__, &
+        file=FILENAME, &
+        rcToReturn=rc)) &
+        return  ! bail out
+    endif
+
   end subroutine
   !-----------------------------------------------------------------------------
   
@@ -1026,8 +1296,8 @@ module NUOPC_Comp
             line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
             return  ! bail out
         else
-          call ESMF_AttributeGet(comp, trim(tokenList(1)), convention="NUOPC", &
-            purpose="Instance", isPresent=isPresent, rc=localrc)
+          call NUOPC_CompAttributeGet(comp, name=trim(tokenList(1)), &
+            isPresent=isPresent, rc=localrc)
           if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
             line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
             return  ! bail out
@@ -1171,8 +1441,8 @@ module NUOPC_Comp
             line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
             return  ! bail out
         else
-          call ESMF_AttributeGet(comp, trim(tokenList(1)), convention="NUOPC", &
-            purpose="Instance", isPresent=isPresent, rc=localrc)
+          call NUOPC_CompAttributeGet(comp, name=trim(tokenList(1)), &
+            isPresent=isPresent, rc=localrc)
           if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
             line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
             return  ! bail out
@@ -1506,11 +1776,18 @@ module NUOPC_Comp
   !-----------------------------------------------------------------------------
     ! local variables
     integer                               :: localrc
+    type(ESMF_Info)                       :: info
     
     if (present(rc)) rc = ESMF_SUCCESS
 
-    call ESMF_AttributeSet(comp, name=name, value=value, &
-      convention="NUOPC", purpose="Instance", attnestflag=ESMF_ATTNEST_ON, &
+    call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+
+    call ESMF_InfoSet(info, key="/NUOPC/Instance/"//name, value=value, &
       rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
@@ -1542,11 +1819,18 @@ module NUOPC_Comp
   !-----------------------------------------------------------------------------
     ! local variables
     integer                               :: localrc
+    type(ESMF_Info)                       :: info
     
     if (present(rc)) rc = ESMF_SUCCESS
 
-    call ESMF_AttributeSet(comp, name=name, value=value, &
-      convention="NUOPC", purpose="Instance", attnestflag=ESMF_ATTNEST_ON, &
+    call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+
+    call ESMF_InfoSet(info, key="/NUOPC/Instance/"//name, value=value, &
       rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
@@ -1578,11 +1862,18 @@ module NUOPC_Comp
   !-----------------------------------------------------------------------------
     ! local variables
     integer                               :: localrc
+    type(ESMF_Info)                       :: info
     
     if (present(rc)) rc = ESMF_SUCCESS
 
-    call ESMF_AttributeSet(comp, name=name, value=value, &
-      convention="NUOPC", purpose="Instance", attnestflag=ESMF_ATTNEST_ON, &
+    call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+
+    call ESMF_InfoSet(info, key="/NUOPC/Instance/"//name, value=value, &
       rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
@@ -1614,11 +1905,18 @@ module NUOPC_Comp
   !-----------------------------------------------------------------------------
     ! local variables
     integer                               :: localrc
+    type(ESMF_Info)                       :: info
     
     if (present(rc)) rc = ESMF_SUCCESS
 
-    call ESMF_AttributeSet(comp, name=name, value=value, &
-      convention="NUOPC", purpose="Instance", attnestflag=ESMF_ATTNEST_ON, &
+    call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+
+    call ESMF_InfoSet(info, key="/NUOPC/Instance/"//name, value=value, &
       rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
@@ -1651,11 +1949,18 @@ module NUOPC_Comp
   !-----------------------------------------------------------------------------
     ! local variables
     integer                               :: localrc
+    type(ESMF_Info)                       :: info
     
     if (present(rc)) rc = ESMF_SUCCESS
 
-    call ESMF_AttributeSet(comp, name=name, valueList=valueList, &
-      convention="NUOPC", purpose="Instance", attnestflag=ESMF_ATTNEST_ON, &
+    call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+
+    call ESMF_InfoSet(info, key="/NUOPC/Instance/"//name, values=valueList, &
       rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
@@ -1687,11 +1992,18 @@ module NUOPC_Comp
   !-----------------------------------------------------------------------------
     ! local variables
     integer                               :: localrc
+    type(ESMF_Info)                       :: info
     
     if (present(rc)) rc = ESMF_SUCCESS
 
-    call ESMF_AttributeSet(comp, name=name, valueList=valueList, &
-      convention="NUOPC", purpose="Instance", attnestflag=ESMF_ATTNEST_ON, &
+    call ESMF_InfoGetFromHost(comp, info=info, rc=localrc)
+    if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, &
+      file=FILENAME, &
+      rcToReturn=rc)) &
+      return  ! bail out
+
+    call ESMF_InfoSet(info, key="/NUOPC/Instance/"//name, values=valueList, &
       rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, &
@@ -1899,9 +2211,8 @@ module NUOPC_Comp
 
     if (.not.isSet) return ! nothing to be done -> early return
 
-    call ESMF_AttributeGet(comp, name=trim(attributeName), &
-      itemCount=itemCount, convention="NUOPC", purpose="Instance", &
-      attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+    call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+      itemCount=itemCount, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
       return  ! bail out
@@ -1916,9 +2227,8 @@ module NUOPC_Comp
       rcToReturn=rc)) return  ! bail out
 
     ! get the current phases
-    call ESMF_AttributeGet(comp, name=trim(attributeName), valueList=phases, &
-      convention="NUOPC", purpose="Instance", attnestflag=ESMF_ATTNEST_ON, &
-      rc=localrc)
+    call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+      valueList=phases, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
       return  ! bail out
@@ -2019,9 +2329,8 @@ module NUOPC_Comp
 
     if (.not.isSet) return ! nothing to be done -> early return
 
-    call ESMF_AttributeGet(comp, name=trim(attributeName), &
-      itemCount=itemCount, convention="NUOPC", purpose="Instance", &
-      attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+    call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+      itemCount=itemCount, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
       return  ! bail out
@@ -2035,9 +2344,8 @@ module NUOPC_Comp
       file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
       
     ! get the current phases
-    call ESMF_AttributeGet(comp, name=trim(attributeName), valueList=phases, &
-      convention="NUOPC", purpose="Instance", attnestflag=ESMF_ATTNEST_ON, &
-      rc=localrc)
+    call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+      valueList=phases, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
       return  ! bail out
@@ -2103,18 +2411,18 @@ module NUOPC_Comp
     character(ESMF_MAXSTR)          :: lName, valueString
     integer                         :: max, high, low
     
+    call ESMF_TraceRegionEnter("NUOPC_GridCompGet", rc=rc)
+    if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
+      return  ! bail out
+
     ! query the component for its name
     call ESMF_GridCompGet(comp, name=lName, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, file=trim(lName)//":"//FILENAME, rcToReturn=rc)) &
       return  ! bail out
       
-    if (present(name)) then
-      call ESMF_GridCompGet(comp, name=name, rc=localrc)
-      if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
-        line=__LINE__, file=trim(lName)//":"//FILENAME, rcToReturn=rc)) &
-        return  ! bail out
-    endif
+    if (present(name)) name=lName
 
     if (present(verbosity)) then
       ! initialize the output value
@@ -2193,6 +2501,11 @@ module NUOPC_Comp
     ! return successfully
     if (present(rc)) rc = ESMF_SUCCESS
     
+    call ESMF_TraceRegionExit("NUOPC_GridCompGet", rc=rc)
+    if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
+      line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
+      return  ! bail out
+
   end subroutine
   !-----------------------------------------------------------------------------
 
@@ -2225,12 +2538,7 @@ module NUOPC_Comp
       line=__LINE__, file=trim(lName)//":"//FILENAME, rcToReturn=rc)) &
       return  ! bail out
 
-    if (present(name)) then
-      call ESMF_CplCompGet(comp, name=name, rc=localrc)
-      if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
-        line=__LINE__, file=trim(lName)//":"//FILENAME, rcToReturn=rc)) &
-        return  ! bail out
-    endif
+    if (present(name)) name=lName
 
     if (present(verbosity)) then
       ! initialize the output value
@@ -2370,9 +2678,8 @@ module NUOPC_Comp
 
     if (.not.isSet) return ! nothing to be done -> early return
 
-    call ESMF_AttributeGet(comp, name=trim(attributeName), &
-      itemCount=itemCount, convention="NUOPC", purpose="Instance", &
-      attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+    call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+      itemCount=itemCount, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
       return  ! bail out
@@ -2385,9 +2692,8 @@ module NUOPC_Comp
         line=__LINE__, &
         file=trim(name)//":"//FILENAME, &
         rcToReturn=rc)) return  ! bail out
-      call ESMF_AttributeGet(comp, name=trim(attributeName), valueList=phases, &
-        convention="NUOPC", purpose="Instance", attnestflag=ESMF_ATTNEST_ON, &
-        rc=localrc)
+      call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+        valueList=phases, rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
         return  ! bail out
@@ -2483,9 +2789,8 @@ module NUOPC_Comp
 
     if (.not.isSet) return ! nothing to be done -> early return
 
-    call ESMF_AttributeGet(comp, name=trim(attributeName), &
-      itemCount=itemCount, convention="NUOPC", purpose="Instance", &
-      attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+    call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+      itemCount=itemCount, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
       return  ! bail out
@@ -2498,9 +2803,8 @@ module NUOPC_Comp
         line=__LINE__, &
         file=trim(name)//":"//FILENAME, &
         rcToReturn=rc)) return  ! bail out
-      call ESMF_AttributeGet(comp, name=trim(attributeName), valueList=phases, &
-        convention="NUOPC", purpose="Instance", attnestflag=ESMF_ATTNEST_ON, &
-        rc=localrc)
+      call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+        valueList=phases, rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
         return  ! bail out
@@ -2606,9 +2910,8 @@ module NUOPC_Comp
 
     if (.not.isSet) return ! nothing to be done -> early return
 
-    call ESMF_AttributeGet(comp, name=trim(attributeName), &
-      itemCount=itemCount, convention="NUOPC", purpose="Instance", &
-      attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+    call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+      itemCount=itemCount, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
       return  ! bail out
@@ -2621,9 +2924,8 @@ module NUOPC_Comp
         line=__LINE__, &
         file=trim(name)//":"//FILENAME, &
         rcToReturn=rc)) return  ! bail out
-      call ESMF_AttributeGet(comp, name=trim(attributeName), valueList=phases, &
-        convention="NUOPC", purpose="Instance", attnestflag=ESMF_ATTNEST_ON, &
-        rc=localrc)
+      call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+        valueList=phases, rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
       if (present(phaseIndex)) then
@@ -2718,9 +3020,8 @@ module NUOPC_Comp
 
     if (.not.isSet) return ! nothing to be done -> early return
 
-    call ESMF_AttributeGet(comp, name=trim(attributeName), &
-      itemCount=itemCount, convention="NUOPC", purpose="Instance", &
-      attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+    call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+      itemCount=itemCount, rc=localrc)
     if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
       line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
       return  ! bail out
@@ -2732,9 +3033,8 @@ module NUOPC_Comp
         msg="Allocation of temporary data structure.", &
         line=__LINE__, &
         file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
-      call ESMF_AttributeGet(comp, name=trim(attributeName), valueList=phases, &
-        convention="NUOPC", purpose="Instance", attnestflag=ESMF_ATTNEST_ON, &
-        rc=localrc)
+      call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+        valueList=phases, rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) &
         return  ! bail out
@@ -2905,9 +3205,8 @@ module NUOPC_Comp
       line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
     itemCount=0
     if (isSet) then
-      call ESMF_AttributeGet(comp, name=trim(attributeName), &
-        itemCount=itemCount, convention="NUOPC", purpose="Instance", &
-        attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+      call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+        itemCount=itemCount, rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
     endif
@@ -2916,9 +3215,8 @@ module NUOPC_Comp
       msg="Allocation of temporary data structure.", &
       line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
     if (isSet .and. (itemCount > 0)) then
-      call ESMF_AttributeGet(comp, name=trim(attributeName), &
-        valueList=phases(1:itemcount), convention="NUOPC", purpose="Instance", &
-        attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+      call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+        valueList=phases(1:itemcount), rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
     endif
@@ -3054,9 +3352,8 @@ module NUOPC_Comp
       line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
     itemCount=0
     if (isSet) then
-      call ESMF_AttributeGet(comp, name=trim(attributeName), &
-        itemCount=itemCount, convention="NUOPC", purpose="Instance", &
-        attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+      call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+        itemCount=itemCount, rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
     endif
@@ -3065,9 +3362,8 @@ module NUOPC_Comp
       msg="Allocation of temporary data structure.", &
       line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
     if (isSet .and. (itemCount > 0)) then
-      call ESMF_AttributeGet(comp, name=trim(attributeName), &
-        valueList=phases(1:itemcount), convention="NUOPC", purpose="Instance", &
-        attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+      call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+        valueList=phases(1:itemcount), rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
     endif
@@ -3203,9 +3499,8 @@ module NUOPC_Comp
       line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
     itemCount=0
     if (isSet) then
-      call ESMF_AttributeGet(comp, name=trim(attributeName), &
-        itemCount=itemCount, convention="NUOPC", purpose="Instance", &
-        attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+      call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+        itemCount=itemCount, rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
     endif
@@ -3215,9 +3510,8 @@ module NUOPC_Comp
       line=__LINE__, file=trim(name)//":"//FILENAME, &
       rcToReturn=rc)) return  ! bail out
     if (isSet .and. (itemCount > 0)) then
-      call ESMF_AttributeGet(comp, name=trim(attributeName), &
-        valueList=phases(1:itemcount), convention="NUOPC", purpose="Instance", &
-        attnestflag=ESMF_ATTNEST_ON, rc=localrc)
+      call NUOPC_CompAttributeGet(comp, name=trim(attributeName), &
+        valueList=phases(1:itemcount), rc=localrc)
       if (ESMF_LogFoundError(rcToCheck=localrc, msg=ESMF_LOGERR_PASSTHRU, &
         line=__LINE__, file=trim(name)//":"//FILENAME, rcToReturn=rc)) return  ! bail out
     endif
